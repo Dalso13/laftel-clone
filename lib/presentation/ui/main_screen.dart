@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:laftel_clone/presentation/ui/main_screen_item/day_recommend_item.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/week_new_anime.dart';
 
 import 'main_screen_item/banner_item.dart';
+import 'main_screen_item/membership_item.dart';
+import 'main_screen_item/popular_anime_item.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -42,12 +45,14 @@ class _MainScreenState extends State<MainScreen> {
             delegate: SliverChildListDelegate([
               Column(
                children: [
-                 BannerItem(),
+                 const BannerItem(),
                  WeekNewAnime(selections: _selections, onSelected: () {
                    setState(() {
-
                    });
-                 })
+                 }),
+                 const DayRecommendItem(),
+                 const MembershipItem(),
+                 const PopularAnimeItem(),
                ],
               )
             ]),

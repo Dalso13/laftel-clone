@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class WeekNewAnime extends StatelessWidget {
-  List<Map<String, dynamic>> _selections;
+  final List<Map<String, dynamic>> _selections;
   final void Function() _onSelected;
 
-  WeekNewAnime({
+  const WeekNewAnime({
     super.key,
     required List<Map<String, dynamic>> selections,
     required void Function() onSelected,
@@ -65,25 +65,28 @@ class WeekNewAnime extends StatelessWidget {
                   .toList()),
         ),
         SizedBox(
-          height: 250,
+          height: 200,
           child: GridView.count(
+              childAspectRatio: 0.8,
               padding: const EdgeInsets.all(16),
               mainAxisSpacing: 15,
               crossAxisCount: 1,
               scrollDirection: Axis.horizontal,
               children: [1, 2, 3, 4, 5]
                   .map(
-                    (e) => GridTile(
-                      footer: const GridTileBar(
-                        title: Text(
+                    (e) =>  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image.network(
+                            'https://cdn.pixabay.com/photo/2023/08/30/18/02/leaves-8223869_1280.jpg',
+                            fit: BoxFit.cover, height: 120,width: double.infinity),
+                        Text(
                           'test',
                           style: TextStyle(color: Colors.black),
                         ),
-                      ),
-                      child: Image.network(
-                          'https://cdn.pixabay.com/photo/2023/08/30/18/02/leaves-8223869_1280.jpg'),
-                    ),
-                  )
+                      ],
+                    )
+              )
                   .toList()),
         )
       ],
