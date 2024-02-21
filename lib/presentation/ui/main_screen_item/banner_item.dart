@@ -20,27 +20,23 @@ class _BannerItemState extends State<BannerItem> {
         children: [
           CarouselSlider(
             items: _data.map((e) {
-              return SizedBox(
-                height: MediaQuery.of(context).size.height*0.30,
+              return Container(
+                color: Colors.grey,
                 width: double.maxFinite,
-                child: Card(
-                  color: Colors.blueAccent,
-                  child: Text('$e'),
-                ),
+                child: Text('$e'),
               );
             }).toList(),
             carouselController: buttonCarouselController,
             options: CarouselOptions(
-              autoPlay: false,
-              enlargeCenterPage: true,
-              viewportFraction: 0.9,
-              aspectRatio: 2.0,
-              initialPage: 2,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              }
+                autoPlay: false,
+                viewportFraction: 1,
+                initialPage: 1,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+              height: 600
             ),
           ),
           Positioned(
@@ -65,3 +61,26 @@ class _BannerItemState extends State<BannerItem> {
     );
   }
 }
+
+/*
+* SizedBox(
+            height: 500,
+            width: double.maxFinite,
+            child: PageView(
+              controller: pageController,
+              children: _data.map((e) {
+                return Container(
+                  color: Colors.grey,
+                  width: double.maxFinite,
+                  height: 1000,
+                  child: Text('$e'),
+                );
+              }).toList(),
+              onPageChanged: (int index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+            ),
+          ),
+* */

@@ -1,9 +1,9 @@
 enum PopularAnimeState {
-  realTime(value : '실시간'),
-  week(value : '이번주'),
-  quarter(value : '분기'),
-  allTime(value : '역대');
+  realTime(kr : '실시간'),
+  week(kr : '이번주'),
+  quarter(kr : '분기'),
+  allTime(kr : '역대');
 
-  final String value;
-  const PopularAnimeState({required this.value});
+  final String kr;
+  const PopularAnimeState({required this.kr});
 }

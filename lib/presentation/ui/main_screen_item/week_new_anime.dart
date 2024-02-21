@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:laftel_clone/core/week_state.dart';
+import 'package:laftel_clone/presentation/view_model/view_model_state/main_state.dart';
+
+import '../../../domain/model/simple_anime_model.dart';
 
 class WeekNewAnime extends StatelessWidget {
-  final List<Map<String, dynamic>> _selections;
-  final void Function() _onSelected;
+  final MainState _state;
+  final void Function(WeekState week) _onSelected;
+  final List<SimpleAnimeModel> _animeList;
 
   const WeekNewAnime({
     super.key,
-    required List<Map<String, dynamic>> selections,
-    required void Function() onSelected,
-  })  : _selections = selections,
-        _onSelected = onSelected;
+    required MainState state,
+    required void Function(WeekState week) onSelected,
+    required List<SimpleAnimeModel> animeList,
+  })  : _state = state,
+        _onSelected = onSelected,
+        _animeList = animeList;
 
   @override
   Widget build(BuildContext context) {
@@ -36,29 +43,26 @@ class WeekNewAnime extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-              children: _selections
+              children: WeekState.values
                   .map(
                     (e) => Padding(
                       padding: const EdgeInsets.all(3.0),
                       child: ChoiceChip(
                         labelPadding: const EdgeInsets.all(4.0),
-                        label: Text(e['name']),
+                        label: Text(e.kr),
                         labelStyle: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                         backgroundColor: Colors.grey[400],
-                        selectedColor: Colors.deepPurple[200],
-                        selected: e['isBool'],
+                        selectedColor: Colors.deepPurple[400],
+                        selected: _state.currentWeek == e,
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         onSelected: (bool value) {
-                          e['isBool'] = value;
-                          _onSelected();
+                          _onSelected(e);
                         },
                         showCheckmark: false,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(60))),
+                        shape: const StadiumBorder(side: BorderSide(style: BorderStyle.none)),
                       ),
                     ),
                   )
@@ -72,17 +76,18 @@ class WeekNewAnime extends StatelessWidget {
               mainAxisSpacing: 15,
               crossAxisCount: 1,
               scrollDirection: Axis.horizontal,
-              children: [1, 2, 3, 4, 5]
+              children: _animeList
                   .map(
                     (e) =>  Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.network(
-                            'https://cdn.pixabay.com/photo/2023/08/30/18/02/leaves-8223869_1280.jpg',
+                        Image.network(e.img,
                             fit: BoxFit.cover, height: 120,width: double.infinity),
                         Text(
-                          'test',
+                          e.name,
                           style: TextStyle(color: Colors.black),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     )

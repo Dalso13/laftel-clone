@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:laftel_clone/core/Popular_anime_state.dart';
 
+import '../../view_model/view_model_state/main_state.dart';
+
 class PopularAnimeItem extends StatelessWidget {
-  const PopularAnimeItem({super.key});
+  final MainState _state;
+  final void Function(PopularAnimeState popular) _onSelected;
+
+  const PopularAnimeItem({
+    super.key,
+    required MainState state,
+    required void Function(PopularAnimeState popular) onSelected,
+  })  : _state = state,
+        _onSelected = onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -24,29 +34,32 @@ class PopularAnimeItem extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.all(3.0),
                   child: ChoiceChip(
-                    labelPadding: const EdgeInsets.all(4.0),
-                    label: Text(e.value),
-                    labelStyle: const TextStyle(
-                      fontSize: 16,
+                    labelPadding: const EdgeInsets.all(2.0),
+                    label: Container(
+                        width: 50,
+                        height: 30,
+                        alignment: AlignmentDirectional.center,
+                        child: Text(e.kr)),
+                    labelStyle: TextStyle(
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: _state.currentPopular == e ? Colors.white : Colors.black,
                     ),
-                    selectedColor: Colors.deepPurple[200],
-                    selected: false,
+                    selectedColor: Colors.deepPurple[400],
+                    selected: _state.currentPopular == e,
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     onSelected: (bool value) {
-                      if (value) return;
+                      _onSelected(e);
                     },
                     showCheckmark: false,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(60))),
+                    shape: const StadiumBorder(side: BorderSide(color: Colors.grey)),
                   ),
                 );
               }).toList(),
             ),
             SizedBox(
               width: double.infinity,
-              height: 350,
+              height: 300,
               child: GridView.count(
                 childAspectRatio: 0.3,
                 padding: const EdgeInsets.all(16),
@@ -59,14 +72,14 @@ class PopularAnimeItem extends StatelessWidget {
                     children: [
                       Image.network(
                         'https://cdn.pixabay.com/photo/2023/08/30/18/02/leaves-8223869_1280.jpg',
-                        width: 130,
-                        height: 80,
+                        width: 120,
+                        height: 70,
                         fit: BoxFit.cover,
                       ),
                       Padding(
                           padding: EdgeInsets.only(right: 8, left: 8),
                           child: Text(
-                            '${[1, 2, 3, 4, 5, 6].indexOf(e)}',
+                            '${[1, 2, 3, 4, 5, 6].indexOf(e) + 1}',
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           )),
