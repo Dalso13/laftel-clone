@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:laftel_clone/core/Popular_anime_state.dart';
 import 'package:laftel_clone/presentation/ui/bottom_navi_item.dart';
-import 'package:laftel_clone/presentation/ui/main_screen_item/day_recommend_item.dart';
+import 'package:laftel_clone/presentation/ui/main_screen_item/theme_recommend_item.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/laftel_only_anim_item.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/week_new_anime.dart';
 import 'package:laftel_clone/presentation/view_model/main_view_model.dart';
@@ -66,7 +66,11 @@ class _MainScreenState extends State<MainScreen> {
             delegate: SliverChildListDelegate(
               [
                 state.isLoading
-                    ? const CircularProgressIndicator()
+                    ? Container(
+                        alignment: Alignment.center,
+                        width: 50,
+                        height: 50,
+                        child: const CircularProgressIndicator())
                     : Column(
                         children: [
                           WeekNewAnime(
@@ -77,14 +81,14 @@ class _MainScreenState extends State<MainScreen> {
                             animeList:
                                 viewModel.getNowDayAnimeList(state.currentWeek),
                           ),
-                          const DayRecommendItem(),
                           const MembershipItem(),
                           PopularAnimeItem(
                               state: state,
                               onSelected: (PopularAnimeState popular) {
                                 viewModel.popularButtonChange(popular);
                               }),
-                          const DayRecommendItem(),
+                          ...state.themeAnimeList
+                              .map((e) => ThemeRecommendItem(model: e)),
                           const LaftelOnlyItem(),
                           const FeedbackItem(),
                         ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:laftel_clone/core/Popular_anime_state.dart';
+import 'package:laftel_clone/core/get_quarter.dart';
+import 'package:laftel_clone/core/get_week_state.dart';
 import 'package:laftel_clone/core/week_state.dart';
 import 'package:laftel_clone/domain/use_case/get_anime_data_use_case/interface/get_quarter_anime.dart';
 import 'package:laftel_clone/presentation/view_model/view_model_state/main_state.dart';
@@ -22,12 +24,14 @@ class MainViewModel extends ChangeNotifier {
     element.distributedAirTime == '${week.kr}요일').toList();
   }
 
-  void init() {
-    _changeWeekAnimeList();
+  void init() async {
+    await _changeWeekAnimeList();
+    await _changeThemeAnimeList();
 
     _mainState = _mainState.copyWith(
         isLoading: false
     );
+
     notifyListeners();
   }
 
@@ -47,43 +51,24 @@ class MainViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Map<String, String> _getNowDate() {
+  Future<void> _changeWeekAnimeList() async {
     final date = DateTime.now();
-
-    String quarter = '1';
-    switch (date.month) {
-      case 0:
-      case 1:
-      case 2:
-        quarter = '1';
-        break;
-      case 3:
-      case 4:
-      case 5:
-        quarter = '2';
-        break;
-      case 6:
-      case 7:
-      case 8:
-        quarter = '3';
-        break;
-      case 9:
-      case 10:
-      case 11:
-        quarter = '4';
-        break;
-    }
-
-    return {'year': '${date.year}', 'quarter': quarter};
-  }
-
-  void _changeWeekAnimeList() async {
-    final nowDate = _getNowDate();
-    final weekAnimeList = await _getQuarterAnime.execute(
-        nowDate['year']!, nowDate['quarter']!);
+    final weekAnimeList = await _getQuarterAnime.getQuarter(
+        '${date.year}', date.getQuarter());
 
     _mainState = _mainState.copyWith(
         weekAnimeList: weekAnimeList
+    );
+
+    _mainState = _mainState.copyWith(
+      currentWeek: date.getWeekState()
+    );
+  }
+  Future<void> _changeThemeAnimeList() async {
+    final themeAnimeList = await _getQuarterAnime.getTheme();
+
+    _mainState = _mainState.copyWith(
+        themeAnimeList: themeAnimeList
     );
   }
 }

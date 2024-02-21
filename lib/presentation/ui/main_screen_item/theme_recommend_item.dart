@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:laftel_clone/domain/model/theme_anime_model.dart';
 
-class DayRecommendItem extends StatelessWidget {
-  const DayRecommendItem({super.key});
+class ThemeRecommendItem extends StatelessWidget {
+  final ThemeAnimeModel _model;
+
+  const ThemeRecommendItem({
+    super.key,
+    required ThemeAnimeModel model,
+  }) : _model = model;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 16.0),
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0),
           child: Text(
-            '오늘의 추천작',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            _model.title,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ),
         SizedBox(
@@ -23,17 +29,18 @@ class DayRecommendItem extends StatelessWidget {
               mainAxisSpacing: 15,
               crossAxisCount: 1,
               scrollDirection: Axis.horizontal,
-              children: [1, 2, 3, 4, 5]
+              children: _model.themeItemList
                   .map(
                     (e) => Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.network(
-                            'https://cdn.pixabay.com/photo/2023/08/30/18/02/leaves-8223869_1280.jpg',
+                        Image.network(e.img,
                             fit: BoxFit.cover, height: 120,width: double.infinity),
                         Text(
-                          'test',
-                          style: TextStyle(color: Colors.black),
+                          e.name,
+                          style: const TextStyle(color: Colors.black),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
@@ -43,4 +50,5 @@ class DayRecommendItem extends StatelessWidget {
       ],
     );
   }
+
 }
