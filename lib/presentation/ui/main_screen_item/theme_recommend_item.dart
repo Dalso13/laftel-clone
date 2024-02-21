@@ -15,7 +15,7 @@ class ThemeRecommendItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 16.0),
+          padding: const EdgeInsets.only(left: 16.0, right: 32),
           child: Text(
             _model.title,
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),

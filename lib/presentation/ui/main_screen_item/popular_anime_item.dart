@@ -43,7 +43,9 @@ class PopularAnimeItem extends StatelessWidget {
                     labelStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: _state.currentPopular == e ? Colors.white : Colors.black,
+                      color: _state.currentPopular == e
+                          ? Colors.white
+                          : Colors.black,
                     ),
                     selectedColor: Colors.deepPurple[400],
                     selected: _state.currentPopular == e,
@@ -52,7 +54,8 @@ class PopularAnimeItem extends StatelessWidget {
                       _onSelected(e);
                     },
                     showCheckmark: false,
-                    shape: const StadiumBorder(side: BorderSide(color: Colors.grey)),
+                    shape: const StadiumBorder(
+                        side: BorderSide(color: Colors.grey)),
                   ),
                 );
               }).toList(),
@@ -66,12 +69,12 @@ class PopularAnimeItem extends StatelessWidget {
                 mainAxisSpacing: 15,
                 crossAxisCount: 3,
                 scrollDirection: Axis.horizontal,
-                children: [1, 2, 3, 4, 5, 6].map((e) {
+                children: _state.weekAnimeList.take(9).map((e) {
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.network(
-                        'https://cdn.pixabay.com/photo/2023/08/30/18/02/leaves-8223869_1280.jpg',
+                        e.img,
                         width: 120,
                         height: 70,
                         fit: BoxFit.cover,
@@ -79,7 +82,7 @@ class PopularAnimeItem extends StatelessWidget {
                       Padding(
                           padding: EdgeInsets.only(right: 8, left: 8),
                           child: Text(
-                            '${[1, 2, 3, 4, 5, 6].indexOf(e) + 1}',
+                            '${_state.weekAnimeList.indexOf(e) + 1}',
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           )),
@@ -90,7 +93,7 @@ class PopularAnimeItem extends StatelessWidget {
                             Container(
                               padding: EdgeInsets.only(right: 16, bottom: 8),
                               child: Text(
-                                'testtesttesttesttesttesttest',
+                                e.name,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -99,11 +102,11 @@ class PopularAnimeItem extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'tag',
+                              e.genres.take(2).join('/'),
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   color: Colors.grey[700], fontSize: 16),
-                            )
+                            ),
                           ],
                         ),
                       ),

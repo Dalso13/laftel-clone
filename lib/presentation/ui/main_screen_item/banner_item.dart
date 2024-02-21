@@ -30,7 +30,7 @@ class _BannerItemState extends State<BannerItem> {
             options: CarouselOptions(
                 autoPlay: false,
                 viewportFraction: 1,
-                initialPage: 1,
+                initialPage: 0,
                 onPageChanged: (index, reason) {
                   setState(() {
                     _currentIndex = index;
