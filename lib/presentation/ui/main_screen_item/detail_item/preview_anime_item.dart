@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../domain/model/simple_anime_model.dart';
 import '../../anime_option_item/ad_free_item.dart';
@@ -16,36 +17,41 @@ class PreviewAnimeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Stack(
-          children: [
-            Image.network(_model.img,
-                fit: BoxFit.cover,
-                height: 110,
-                width: double.infinity),
-            Positioned(
-              bottom: 0,
-              right: 4,
-              child: Row(
-                children: [
-                  if (_model.isLaftelOnly) const LaftelOnlyItem(),
-                  if (_model.isDubbed) const DubbingItem(),
-                  if (_model.isAvod) const AdFreeItem(),
-                  if (_model.isUncensored) const UncensoredItem(),
-                ],
-              ),
-            )
-          ],
-        ),
-        Text(
-          _model.name,
-          style: const TextStyle(color: Colors.black),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ],
+    return GestureDetector(
+      onTap: () {
+        context.push('/detail-anime', extra: _model.id);
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              Image.network(_model.img,
+                  fit: BoxFit.cover,
+                  height: 110,
+                  width: double.infinity),
+              Positioned(
+                bottom: 0,
+                right: 4,
+                child: Row(
+                  children: [
+                    if (_model.isLaftelOnly) const LaftelOnlyItem(),
+                    if (_model.isDubbed) const DubbingItem(),
+                    if (_model.isAvod) const AdFreeItem(),
+                    if (_model.isUncensored) const UncensoredItem(),
+                  ],
+                ),
+              )
+            ],
+          ),
+          Text(
+            _model.name,
+            style: const TextStyle(color: Colors.black),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
     );
   }
 }

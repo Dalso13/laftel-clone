@@ -4,6 +4,7 @@ import 'package:laftel_clone/presentation/ui/bottom_navi_item.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/theme_recommend_item.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/laftel_only_anim_item.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/week_new_anime.dart';
+import 'package:laftel_clone/presentation/ui/week_anime_list/week_anime_list_screen.dart';
 import 'package:laftel_clone/presentation/view_model/main_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:sliver_tools/sliver_tools.dart';
@@ -67,9 +68,10 @@ class _MainScreenState extends State<MainScreen> {
               [
                 state.isLoading
                     ? Container(
+                        margin: const EdgeInsets.all(16),
                         alignment: Alignment.center,
-                        width: 40,
-                        height: 40,
+                        width: 30,
+                        height: 30,
                         child: const CircularProgressIndicator())
                     : Column(
                         children: [
@@ -80,6 +82,18 @@ class _MainScreenState extends State<MainScreen> {
                             },
                             animeList:
                                 viewModel.getNowDayAnimeList(state.currentWeek),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ChangeNotifierProvider.value(
+                                    value: viewModel,
+                                    child: const WeekAnimeListScreen(),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                           const MembershipItem(),
                           PopularAnimeItem(
