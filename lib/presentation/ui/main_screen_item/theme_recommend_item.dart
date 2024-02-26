@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laftel_clone/domain/model/theme_anime_model.dart';
 
 class ThemeRecommendItem extends StatelessWidget {
@@ -31,18 +32,23 @@ class ThemeRecommendItem extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: _model.themeItemList
                   .map(
-                    (e) => Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.network(e.img,
-                            fit: BoxFit.cover, height: 120,width: double.infinity),
-                        Text(
-                          e.name,
-                          style: const TextStyle(color: Colors.black),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
+                    (e) => GestureDetector(
+                      onTap: () {
+                        context.push('/detail-anime', extra: e.id);
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.network(e.img,
+                              fit: BoxFit.cover, height: 120,width: double.infinity),
+                          Text(
+                            e.name,
+                            style: const TextStyle(color: Colors.black),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
                     ),
                   )
                   .toList()),
