@@ -13,7 +13,7 @@ class DetailAnimeEpisodePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   SliverList(
+    return SliverList(
       delegate: SliverChildListDelegate(
         [
           ListTile(

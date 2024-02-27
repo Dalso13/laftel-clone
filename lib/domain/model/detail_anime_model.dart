@@ -20,6 +20,7 @@ class DetailAnimeModel with _$DetailAnimeModel {
     required String contentRating,
     required bool isAdult,
     required bool viewable,
+    required bool isEnding,
     required double avgRating,
     required AnimationInfoModel animationInfo,
     required List<TagModel> mainTag,

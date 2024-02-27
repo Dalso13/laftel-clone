@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../domain/model/detail_anime_model.dart';
+import 'detail_anime_more_screen.dart';
 
 class DetailAnimeBanner extends StatelessWidget {
   final DetailAnimeModel _model;
@@ -18,7 +19,7 @@ class DetailAnimeBanner extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            margin: const EdgeInsets.only(bottom: 50),
+            margin: const EdgeInsets.only(bottom: 40),
             decoration: BoxDecoration(
               color: Colors.black,
               gradient: LinearGradient(
@@ -82,12 +83,18 @@ class DetailAnimeBanner extends StatelessWidget {
                         style: const TextStyle(color: Colors.white70),
                       ),
                       const Padding(
-                        padding: EdgeInsets.only(right: 8, left: 8),
+                        padding: EdgeInsets.only(right: 4, left: 4),
                         child: Text(
                           '|',
                           style: TextStyle(color: Colors.white70),
                         ),
                       ),
+                      Text(
+                        '${_model.animationInfo.medium}·${_model.isEnding ? '완결' : '방영중'}',
+                        style: const TextStyle(
+                          color: Colors.white70,
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -151,7 +158,7 @@ class DetailAnimeBanner extends StatelessWidget {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(bottom: 8.0, left: 8, right: 8),
+                      const EdgeInsets.only(bottom: 24.0, left: 8, right: 8),
                   child: Stack(
                     children: [
                       Padding(
@@ -170,11 +177,21 @@ class DetailAnimeBanner extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.only(left: 1, right: 8),
                             color: Colors.black,
-                            child: const Text(
-                              '더보기',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          DetailAnimeMoreScreen(model: _model)),
+                                );
+                              },
+                              child: const Text(
+                                '더보기',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),
@@ -182,7 +199,7 @@ class DetailAnimeBanner extends StatelessWidget {
                       )
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

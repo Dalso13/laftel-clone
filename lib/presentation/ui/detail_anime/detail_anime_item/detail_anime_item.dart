@@ -5,6 +5,8 @@ import 'package:laftel_clone/presentation/ui/detail_anime/detail_anime_item/deta
 import 'package:laftel_clone/presentation/ui/detail_anime/detail_anime_item/detail_anime_episode/detail_anime_episode_item.dart';
 import 'package:laftel_clone/presentation/ui/detail_anime/detail_anime_item/detail_anime_episode/detail_anime_episode_page.dart';
 
+import 'detail_anime_select_page_item.dart';
+
 class DetailAnimeItem extends StatelessWidget {
   final DetailAnimeModel _model;
 
@@ -52,13 +54,7 @@ class DetailAnimeItem extends StatelessWidget {
                       topRight: Radius.circular(8),
                       topLeft: Radius.circular(8)),
                   color: Colors.white),
-              child: Row(
-                children: [
-                  TextButton(onPressed: () {}, child: const Text('에피소드')),
-                  TextButton(onPressed: () {}, child: const Text('사용자 평')),
-                  TextButton(onPressed: () {}, child: const Text('비슷한 작품')),
-                ],
-              ),
+              child: const DetailAnimeSelectPageItem()
             ),
           ),
         ),

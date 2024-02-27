@@ -10,6 +10,7 @@ class AnimationInfoModel with _$AnimationInfoModel {
   const factory AnimationInfoModel({
     required String production,
     required String airYearQuarter,
+    required String medium,
     required bool isDubbed,
     required bool isLaftelOnly,
     required bool isLaftelOriginal,
