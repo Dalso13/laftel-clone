@@ -43,6 +43,8 @@ dependencies:
   go_router: ^13.2.0
   carousel_slider: ^4.2.1
   sliver_tools: ^0.2.12
+  modal_bottom_sheet: ^2.1.2
+  flutter_sticky_header: ^0.6.5
 
 dev_dependencies:
   flutter_test:

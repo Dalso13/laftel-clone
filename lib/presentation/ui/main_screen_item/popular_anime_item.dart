@@ -6,13 +6,15 @@ import '../../view_model/view_model_state/main_state.dart';
 class PopularAnimeItem extends StatelessWidget {
   final MainState _state;
   final void Function(PopularAnimeState popular) _onSelected;
+  final void Function({required int id}) _onTab;
 
   const PopularAnimeItem({
     super.key,
     required MainState state,
     required void Function(PopularAnimeState popular) onSelected,
+    required void Function({required int id}) onTab,
   })  : _state = state,
-        _onSelected = onSelected;
+        _onSelected = onSelected,_onTab = onTab;
 
   @override
   Widget build(BuildContext context) {
@@ -70,47 +72,52 @@ class PopularAnimeItem extends StatelessWidget {
                 crossAxisCount: 3,
                 scrollDirection: Axis.horizontal,
                 children: _state.weekAnimeList.take(9).map((e) {
-                  return Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.network(
-                        e.img,
-                        width: 120,
-                        height: 70,
-                        fit: BoxFit.cover,
-                      ),
-                      Padding(
-                          padding: EdgeInsets.only(right: 8, left: 8),
-                          child: Text(
-                            '${_state.weekAnimeList.indexOf(e) + 1}',
-                            style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
-                          )),
-                      Flexible(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(right: 16, bottom: 8),
-                              child: Text(
-                                e.name,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 16,
+                  return GestureDetector(
+                    onTap: () {
+                      _onTab(id: e.id);
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image.network(
+                          e.img,
+                          width: 120,
+                          height: 70,
+                          fit: BoxFit.cover,
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(right: 8, left: 8),
+                            child: Text(
+                              '${_state.weekAnimeList.indexOf(e) + 1}',
+                              style: TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            )),
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(right: 16, bottom: 8),
+                                child: Text(
+                                  e.name,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Text(
-                              e.genres.take(2).join('/'),
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.grey[700], fontSize: 16),
-                            ),
-                          ],
+                              Text(
+                                e.genres.take(2).join('/'),
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.grey[700], fontSize: 16),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   );
                 }).toList(),
               ),

@@ -9,17 +9,20 @@ import '../../anime_option_item/uncensored_item.dart';
 
 class PreviewAnimeItem extends StatelessWidget {
   final SimpleAnimeModel _model;
+  final void Function({required int id}) _onTab;
 
   const PreviewAnimeItem({
     super.key,
     required SimpleAnimeModel model,
-  }) : _model = model;
+    required void Function({required int id}) onTab,
+  })  : _model = model,
+        _onTab = onTab;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push('/detail-anime', extra: _model.id);
+        _onTab(id: _model.id);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

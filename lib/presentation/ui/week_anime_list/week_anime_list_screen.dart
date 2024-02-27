@@ -6,9 +6,12 @@ import '../main_screen_item/detail_item/preview_anime_item.dart';
 import '../main_screen_item/detail_item/week_change_item.dart';
 
 class WeekAnimeListScreen extends StatelessWidget {
+  final void Function({required int id}) _onTab;
+
   const WeekAnimeListScreen({
     super.key,
-  });
+    required void Function({required int id}) onTab,
+  }) : _onTab = onTab;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,7 @@ class WeekAnimeListScreen extends StatelessWidget {
               crossAxisCount: 2,
               children: viewModel
                   .getNowDayAnimeList(state.currentWeek)
-                  .map((e) => PreviewAnimeItem(model: e)).toList(),
+                  .map((e) => PreviewAnimeItem(model: e, onTab: _onTab,)).toList(),
             ),
           ),
         ],

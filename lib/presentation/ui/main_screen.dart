@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laftel_clone/core/Popular_anime_state.dart';
 import 'package:laftel_clone/presentation/ui/bottom_navi_item.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/theme_recommend_item.dart';
@@ -25,6 +26,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
+    super.initState();
     Future.microtask(() {
       context.read<MainViewModel>().init();
     });
@@ -89,18 +91,22 @@ class _MainScreenState extends State<MainScreen> {
                                   builder: (context) =>
                                       ChangeNotifierProvider.value(
                                     value: viewModel,
-                                    child: const WeekAnimeListScreen(),
+                                    child: WeekAnimeListScreen(
+                                        onTab: _goDetailScreen),
                                   ),
                                 ),
                               );
                             },
+                            onTab: _goDetailScreen,
                           ),
                           const MembershipItem(),
                           PopularAnimeItem(
-                              state: state,
-                              onSelected: (PopularAnimeState popular) {
-                                viewModel.popularButtonChange(popular);
-                              }),
+                            state: state,
+                            onSelected: (PopularAnimeState popular) {
+                              viewModel.popularButtonChange(popular);
+                            },
+                            onTab: _goDetailScreen,
+                          ),
                           ...state.themeAnimeList
                               .map((e) => ThemeRecommendItem(model: e)),
                           const LaftelOnlyItem(),
@@ -114,5 +120,9 @@ class _MainScreenState extends State<MainScreen> {
       ),
       bottomNavigationBar: const BottomNaviItem(),
     );
+  }
+
+  void _goDetailScreen({required int id}) {
+    context.push('/detail-anime', extra: id);
   }
 }

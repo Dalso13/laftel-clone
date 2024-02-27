@@ -11,6 +11,7 @@ class WeekNewAnime extends StatelessWidget {
   final void Function(WeekState week) _onSelected;
   final List<SimpleAnimeModel> _animeList;
   final void Function() _onPressed;
+  final void Function({required int id}) _onTab;
 
   const WeekNewAnime({
     super.key,
@@ -18,10 +19,12 @@ class WeekNewAnime extends StatelessWidget {
     required void Function(WeekState week) onSelected,
     required List<SimpleAnimeModel> animeList,
     required void Function() onPressed,
+    required void Function({required int id}) onTab,
   })  : _state = state,
         _onSelected = onSelected,
         _animeList = animeList,
-        _onPressed = onPressed;
+        _onPressed = onPressed,
+        _onTab = onTab;
 
   @override
   Widget build(BuildContext context) {
@@ -90,8 +93,12 @@ class WeekNewAnime extends StatelessWidget {
               mainAxisSpacing: 15,
               crossAxisCount: 1,
               scrollDirection: Axis.horizontal,
-              children:
-                  _animeList.map((e) => PreviewAnimeItem(model: e)).toList()),
+              children: _animeList
+                  .map((e) => PreviewAnimeItem(
+                        model: e,
+                        onTab: _onTab,
+                      ))
+                  .toList()),
         )
       ],
     );

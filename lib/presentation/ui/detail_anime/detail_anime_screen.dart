@@ -3,6 +3,7 @@ import 'package:laftel_clone/core/response_state.dart';
 import 'package:laftel_clone/presentation/view_model/detail_anime_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/detail_anime_menu_state.dart';
 import 'detail_anime_item/detail_anime_item.dart';
 
 class DetailAnimeScreen extends StatefulWidget {
@@ -31,13 +32,24 @@ class _DetailAnimeScreenState extends State<DetailAnimeScreen> {
   Widget build(BuildContext context) {
     final viewModel = context.watch<DetailAnimeViewModel>();
     return Scaffold(
-      body: switch(viewModel.detailAnimeState.detailResponseState){
-        ResponseState.success => viewModel.detailAnime == null ? null : DetailAnimeItem(model : viewModel.detailAnime!),
-
-        ResponseState.loading => const Center(child: CircularProgressIndicator()),
-
+      body: switch (viewModel.detailAnimeState.detailResponseState) {
+        ResponseState.success => viewModel.detailAnime == null
+            ? null
+            : DetailAnimeItem(
+                model: viewModel.detailAnime!,
+                state: viewModel.detailAnimeState,
+                onTab: ({required int id}) {
+                  viewModel.setDetailAnime(id: id);
+                },
+                controller: viewModel.pageController,
+                onSelected: ({required DetailAnimeMenuState menuState}) {
+                  viewModel.clickScrollPageChange(menuState: menuState);
+                },
+              ),
+        ResponseState.loading =>
+          const Center(child: CircularProgressIndicator()),
         ResponseState.error => null,
-    },
+      },
     );
   }
 }
