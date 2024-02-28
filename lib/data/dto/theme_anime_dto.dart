@@ -13,19 +13,19 @@ class ThemeAnimeDto {
     if (json['theme_item_list'] != null) {
       themeItemList = <ThemeItemList>[];
       json['theme_item_list'].forEach((v) {
-        themeItemList!.add(new ThemeItemList.fromJson(v));
+        themeItemList!.add(ThemeItemList.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['content'] = this.content;
-    if (this.themeItemList != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['content'] = content;
+    if (themeItemList != null) {
       data['theme_item_list'] =
-          this.themeItemList!.map((v) => v.toJson()).toList();
+          themeItemList!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -41,15 +41,15 @@ class ThemeItemList {
   ThemeItemList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     ment = json['ment'];
-    item = json['item'] != null ? new ThemeItem.fromJson(json['item']) : null;
+    item = json['item'] != null ? ThemeItem.fromJson(json['item']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['ment'] = this.ment;
-    if (this.item != null) {
-      data['item'] = this.item!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['ment'] = ment;
+    if (item != null) {
+      data['item'] = item!.toJson();
     }
     return data;
   }
@@ -96,18 +96,18 @@ class ThemeItem {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['type'] = this.type;
-    data['name'] = this.name;
-    data['img_url'] = this.imgUrl;
-    data['is_adult'] = this.isAdult;
-    data['is_viewable'] = this.isViewable;
-    data['avg_rating'] = this.avgRating;
-    data['genre_tag_list'] = this.genreTagList;
-    data['is_ending'] = this.isEnding;
-    data['content_rating'] = this.contentRating;
-    data['content'] = this.content;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['type'] = type;
+    data['name'] = name;
+    data['img_url'] = imgUrl;
+    data['is_adult'] = isAdult;
+    data['is_viewable'] = isViewable;
+    data['avg_rating'] = avgRating;
+    data['genre_tag_list'] = genreTagList;
+    data['is_ending'] = isEnding;
+    data['content_rating'] = contentRating;
+    data['content'] = content;
     return data;
   }
 }

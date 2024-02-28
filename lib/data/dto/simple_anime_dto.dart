@@ -58,7 +58,7 @@ class SimpleAnimeDto {
     if (json['images'] != null) {
       images = <Images>[];
       json['images'].forEach((v) {
-        images!.add(new Images.fromJson(v));
+        images!.add(Images.fromJson(v));
       });
     }
     contentRating = json['content_rating'];
@@ -80,32 +80,32 @@ class SimpleAnimeDto {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['img'] = this.img;
-    data['cropped_img'] = this.croppedImg;
-    data['home_img'] = this.homeImg;
-    data['home_cropped_img'] = this.homeCroppedImg;
-    if (this.images != null) {
-      data['images'] = this.images!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['img'] = img;
+    data['cropped_img'] = croppedImg;
+    data['home_img'] = homeImg;
+    data['home_cropped_img'] = homeCroppedImg;
+    if (images != null) {
+      data['images'] = images!.map((v) => v.toJson()).toList();
     }
-    data['content_rating'] = this.contentRating;
-    data['rating'] = this.rating;
-    data['is_adult'] = this.isAdult;
-    data['genres'] = this.genres;
-    data['medium'] = this.medium;
-    data['distributed_air_time'] = this.distributedAirTime;
-    data['is_laftel_only'] = this.isLaftelOnly;
-    data['is_uncensored'] = this.isUncensored;
-    data['is_dubbed'] = this.isDubbed;
-    data['is_avod'] = this.isAvod;
-    data['avod_status'] = this.avodStatus;
-    data['is_viewing'] = this.isViewing;
-    data['latest_episode_created'] = this.latestEpisodeCreated;
-    data['latest_published_datetime'] = this.latestPublishedDatetime;
-    data['is_episode_existed'] = this.isEpisodeExisted;
-    data['is_expired'] = this.isExpired;
+    data['content_rating'] = contentRating;
+    data['rating'] = rating;
+    data['is_adult'] = isAdult;
+    data['genres'] = genres;
+    data['medium'] = medium;
+    data['distributed_air_time'] = distributedAirTime;
+    data['is_laftel_only'] = isLaftelOnly;
+    data['is_uncensored'] = isUncensored;
+    data['is_dubbed'] = isDubbed;
+    data['is_avod'] = isAvod;
+    data['avod_status'] = avodStatus;
+    data['is_viewing'] = isViewing;
+    data['latest_episode_created'] = latestEpisodeCreated;
+    data['latest_published_datetime'] = latestPublishedDatetime;
+    data['is_episode_existed'] = isEpisodeExisted;
+    data['is_expired'] = isExpired;
     return data;
   }
 }
@@ -124,10 +124,10 @@ class Images {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['crop_ratio'] = this.cropRatio;
-    data['img_url'] = this.imgUrl;
-    data['option_name'] = this.optionName;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['crop_ratio'] = cropRatio;
+    data['img_url'] = imgUrl;
+    data['option_name'] = optionName;
     return data;
   }
 }

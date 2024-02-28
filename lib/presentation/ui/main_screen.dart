@@ -6,6 +6,7 @@ import 'package:laftel_clone/presentation/ui/main_screen_item/theme_recommend_it
 import 'package:laftel_clone/presentation/ui/main_screen_item/laftel_only_anim_item.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/week_new_anime.dart';
 import 'package:laftel_clone/presentation/ui/week_anime_list/week_anime_list_screen.dart';
+import 'package:laftel_clone/presentation/ui_sealed/week_anime_event_sealed.dart';
 import 'package:laftel_clone/presentation/view_model/main_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:sliver_tools/sliver_tools.dart';
@@ -79,25 +80,36 @@ class _MainScreenState extends State<MainScreen> {
                         children: [
                           WeekNewAnime(
                             state: state,
-                            onSelected: (WeekState week) {
+                            changeWeek: ({required WeekState week}) {
                               viewModel.weekButtonChange(week);
                             },
                             animeList:
                                 viewModel.getNowDayAnimeList(state.currentWeek),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      ChangeNotifierProvider.value(
-                                    value: viewModel,
-                                    child: WeekAnimeListScreen(
-                                        onTab: _goDetailScreen),
-                                  ),
-                                ),
-                              );
-                            },
                             onTab: _goDetailScreen,
+                            onEvent: (WeekAnimeEventSealed event) {
+                              switch (event) {
+                                case OnSelected():
+                                  viewModel.weekButtonChange(event.week);
+                                case OnPressed():
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ChangeNotifierProvider.value(
+                                        value: viewModel,
+                                        child: WeekAnimeListScreen(
+                                          onTab: _goDetailScreen,
+                                          changeWeek: ({required WeekState week}) {
+                                            viewModel.weekButtonChange(week);
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                case GoNoticePage():
+                                  context.push('/notice');
+                              }
+                            },
                           ),
                           const MembershipItem(),
                           PopularAnimeItem(

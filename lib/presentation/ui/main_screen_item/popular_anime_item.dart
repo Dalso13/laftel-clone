@@ -86,10 +86,10 @@ class PopularAnimeItem extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                         Padding(
-                            padding: EdgeInsets.only(right: 8, left: 8),
+                            padding: const EdgeInsets.only(right: 8, left: 8),
                             child: Text(
                               '${_state.weekAnimeList.indexOf(e) + 1}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 22, fontWeight: FontWeight.bold),
                             )),
                         Flexible(
@@ -97,12 +97,12 @@ class PopularAnimeItem extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                padding: EdgeInsets.only(right: 16, bottom: 8),
+                                padding: const EdgeInsets.only(right: 16, bottom: 8),
                                 child: Text(
                                   e.name,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                   ),
                                 ),

@@ -4,14 +4,14 @@ import '../../../../core/week_state.dart';
 
 class WeekChangeItem extends StatelessWidget {
   final WeekState _currentWeek;
-  final void Function(WeekState week) _onSelected;
+  final void Function({required WeekState week}) _changeWeek;
 
   const WeekChangeItem({
     super.key,
     required WeekState currentWeek,
-    required void Function(WeekState week) onSelected,
+    required void Function({required WeekState week}) changeWeek,
   })  : _currentWeek = currentWeek,
-        _onSelected = onSelected;
+        _changeWeek = changeWeek;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class WeekChangeItem extends StatelessWidget {
                 selected: _currentWeek == e,
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 onSelected: (bool value) {
-                  _onSelected(e);
+                  _changeWeek(week: e);
                 },
                 showCheckmark: false,
                 shape: const StadiumBorder(

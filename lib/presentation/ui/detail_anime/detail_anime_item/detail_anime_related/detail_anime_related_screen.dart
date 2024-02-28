@@ -20,6 +20,7 @@ class DetailAnimeRelatedScreen extends StatelessWidget {
       padding: const EdgeInsets.only(
         right: 8,
         left: 8,
+        top: 16
       ),
       crossAxisCount: 2,
       mainAxisSpacing: 10.0,

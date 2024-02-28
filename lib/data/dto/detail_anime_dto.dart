@@ -119,34 +119,7 @@ class DetailAnimeDto {
 
   @override
   String toString() {
-    return 'DetailAnimeDto{' +
-        ' id: $id,' +
-        ' created: $created,' +
-        ' modified: $modified,' +
-        ' name: $name,' +
-        ' type: $type,' +
-        ' img: $img,' +
-        ' content: $content,' +
-        ' author: $author,' +
-        ' illustrator: $illustrator,' +
-        ' awards: $awards,' +
-        ' contentRating: $contentRating,' +
-        ' isEnding: $isEnding,' +
-        ' mainTag: $mainTag,' +
-        ' viewable: $viewable,' +
-        ' animationInfo: $animationInfo,' +
-        ' isAdult: $isAdult,' +
-        ' resolution: $resolution,' +
-        ' metaInfo: $metaInfo,' +
-        ' authorItem: $authorItem,' +
-        ' mediamixItem: $mediamixItem,' +
-        ' relatedItem: $relatedItem,' +
-        ' seriesItem: $seriesItem,' +
-        ' avgRating: $avgRating,' +
-        ' comicsInfo: $comicsInfo,' +
-        ' lightnovelInfo: $lightnovelInfo,' +
-        ' webtoonInfo: $webtoonInfo,' +
-        '}';
+    return 'DetailAnimeDto{ id: $id, created: $created, modified: $modified, name: $name, type: $type, img: $img, content: $content, author: $author, illustrator: $illustrator, awards: $awards, contentRating: $contentRating, isEnding: $isEnding, mainTag: $mainTag, viewable: $viewable, animationInfo: $animationInfo, isAdult: $isAdult, resolution: $resolution, metaInfo: $metaInfo, authorItem: $authorItem, mediamixItem: $mediamixItem, relatedItem: $relatedItem, seriesItem: $seriesItem, avgRating: $avgRating, comicsInfo: $comicsInfo, lightnovelInfo: $lightnovelInfo, webtoonInfo: $webtoonInfo,}';
   }
 
   DetailAnimeDto copyWith({

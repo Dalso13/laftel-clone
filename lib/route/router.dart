@@ -6,6 +6,7 @@ import 'package:laftel_clone/presentation/view_model/main_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../presentation/ui/detail_anime/detail_anime_screen.dart';
+import '../presentation/ui/notice/notice_screen.dart';
 
 final router = GoRouter(
   initialLocation: '/main',
@@ -16,6 +17,10 @@ final router = GoRouter(
         create: (_) => getIt<MainViewModel>(),
         child: const MainScreen(),
       ),
+    ),
+    GoRoute(
+      path: '/notice',
+      builder: (context, state) => const NoticeScreen()
     ),
     GoRoute(
       path: '/detail-anime',

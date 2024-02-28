@@ -166,7 +166,7 @@ class DetailAnimeBanner extends StatelessWidget {
                         child: Text(
                           _model.content.replaceAll('\n', ' '),
                           maxLines: 2,
-                          style: TextStyle(color: Colors.white70),
+                          style: const TextStyle(color: Colors.white70),
                         ),
                       ),
                       Positioned(

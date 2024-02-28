@@ -27,7 +27,7 @@ class FeedbackDetailItem extends StatelessWidget {
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(8),
                 width: 100,
-                child: Text(
+                child: const Text(
                   '다음에 할게요',
                   style: TextStyle(
                     color: Colors.white,
@@ -47,7 +47,7 @@ class FeedbackDetailItem extends StatelessWidget {
                 width: 100,
                 child: Text(
                   _isLike ? '네, 좋아요' : '의견 남기기',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),

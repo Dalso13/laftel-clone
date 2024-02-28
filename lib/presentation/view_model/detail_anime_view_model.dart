@@ -55,6 +55,7 @@ class DetailAnimeViewModel extends ChangeNotifier {
   }
 
   void clickScrollPageChange({required DetailAnimeMenuState menuState}) {
+    if(menuState == _detailAnimeState.menuState) return;
     pageController.animateToPage(
       menuState.idx,
       duration: const Duration(milliseconds: 200),

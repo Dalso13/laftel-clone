@@ -31,7 +31,7 @@ class LaftelOnlyItem extends StatelessWidget {
                     Image.network(
                         'https://cdn.pixabay.com/photo/2023/08/30/18/02/leaves-8223869_1280.jpg',
                         fit: BoxFit.cover, height: 160,width: double.infinity),
-                    Text(
+                    const Text(
                       'test',
                       style: TextStyle(color: Colors.black),
                     ),

@@ -7,11 +7,14 @@ import '../main_screen_item/detail_item/week_change_item.dart';
 
 class WeekAnimeListScreen extends StatelessWidget {
   final void Function({required int id}) _onTab;
+  final void Function({required WeekState week}) _changeWeek;
 
   const WeekAnimeListScreen({
     super.key,
     required void Function({required int id}) onTab,
-  }) : _onTab = onTab;
+    required void Function({required WeekState week}) changeWeek,
+  })  : _onTab = onTab,
+        _changeWeek = changeWeek;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +27,7 @@ class WeekAnimeListScreen extends StatelessWidget {
       body: Column(
         children: [
           WeekChangeItem(
-            onSelected: (WeekState week) {
-              viewModel.weekButtonChange(week);
-            },
+            changeWeek: _changeWeek,
             currentWeek: state.currentWeek,
           ),
           Expanded(
@@ -37,7 +38,11 @@ class WeekAnimeListScreen extends StatelessWidget {
               crossAxisCount: 2,
               children: viewModel
                   .getNowDayAnimeList(state.currentWeek)
-                  .map((e) => PreviewAnimeItem(model: e, onTab: _onTab,)).toList(),
+                  .map((e) => PreviewAnimeItem(
+                        model: e,
+                        onTab: _onTab,
+                      ))
+                  .toList(),
             ),
           ),
         ],

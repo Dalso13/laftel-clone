@@ -45,6 +45,9 @@ class _DetailAnimeScreenState extends State<DetailAnimeScreen> {
                 onSelected: ({required DetailAnimeMenuState menuState}) {
                   viewModel.clickScrollPageChange(menuState: menuState);
                 },
+                dragPageChange: ({required int index}) {
+                  viewModel.dragScrollPageChange(index: index);
+                },
               ),
         ResponseState.loading =>
           const Center(child: CircularProgressIndicator()),

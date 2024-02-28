@@ -49,7 +49,7 @@ class SeriesListScreen extends StatelessWidget {
           onTap: () {
             context.pop();
           },
-          title: Text('취소'),
+          title: const Text('취소'),
         )
       ],
     );

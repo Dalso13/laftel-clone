@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../domain/model/simple_anime_model.dart';
 import '../../anime_option_item/ad_free_item.dart';

@@ -20,15 +20,20 @@ class DetailAnimeMenuItem extends StatelessWidget {
       return TextButton(
         style: TextButton.styleFrom(
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(4),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
           ),
         ),
         onPressed: () {
           _onSelected(menuState: e);
         },
-        child: Text(e.kr),
+        child: Text(
+          e.kr,
+          style: TextStyle(
+            color: _menuState == e
+                ? Theme.of(context).primaryColor
+                : Theme.of(context).dividerColor,
+          ),
+        ),
       );
     }).toList());
   }

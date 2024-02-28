@@ -16,9 +16,9 @@ class DetailAnimeEpisodeItem extends StatelessWidget {
         width: 100,
         fit: BoxFit.cover,
       ),
-      title: Text('test'),
-      subtitle: Text('test'),
-      trailing: Icon(Icons.download),
+      title: const Text('test'),
+      subtitle: const Text('test'),
+      trailing: const Icon(Icons.download),
     );
   }
 
