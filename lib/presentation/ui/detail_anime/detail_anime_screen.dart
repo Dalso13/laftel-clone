@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/detail_anime_menu_state.dart';
 import 'detail_anime_item/detail_anime_item.dart';
+import 'detail_anime_item/user_comment/comment_write_screen.dart';
 
 class DetailAnimeScreen extends StatefulWidget {
   final int _id;
@@ -47,6 +48,33 @@ class _DetailAnimeScreenState extends State<DetailAnimeScreen> {
                 },
                 dragPageChange: ({required int index}) {
                   viewModel.dragScrollPageChange(index: index);
+                },
+                goWriteScreen: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(8))),
+                    builder: (context) {
+                      return DraggableScrollableSheet(
+                        expand: false,
+                        minChildSize: 0.3,
+                        initialChildSize: 0.5,
+                        maxChildSize: 0.9,
+                        builder: (context, scrollController) =>
+                            ChangeNotifierProvider.value(
+                          value: viewModel,
+                          child: Padding(
+                            padding: MediaQuery.of(context).viewInsets,
+                            child: const CommentWriteScreen(),
+                          ),
+                        ),
+                      );
+                    },
+                  ).then(
+                    (value) => viewModel.reSetCommendWriteState(),
+                  );
                 },
               ),
         ResponseState.loading =>

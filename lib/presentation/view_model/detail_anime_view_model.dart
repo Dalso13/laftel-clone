@@ -11,6 +11,7 @@ class DetailAnimeViewModel extends ChangeNotifier {
   DetailAnimeState _detailAnimeState = const DetailAnimeState();
 
   final PageController pageController = PageController(initialPage: 0);
+  final textController = TextEditingController();
   final GetDetailAnime _getDetailAnime;
   DetailAnimeModel? _detailAnime;
 
@@ -19,7 +20,6 @@ class DetailAnimeViewModel extends ChangeNotifier {
   }) : _getDetailAnime = getDetailAnime;
 
   DetailAnimeModel? get detailAnime => _detailAnime;
-
   DetailAnimeState get detailAnimeState => _detailAnimeState;
 
   void setDetailAnime({required int id}) async {
@@ -64,9 +64,33 @@ class DetailAnimeViewModel extends ChangeNotifier {
     _detailAnimeState = _detailAnimeState.copyWith(menuState: menuState);
     notifyListeners();
   }
+
+  void changeSpoilerEnabled() {
+    _detailAnimeState = _detailAnimeState.copyWith(
+      spoiler: !_detailAnimeState.spoiler
+    );
+    notifyListeners();
+  }
+
+  void onUpdateRating({required double rating}) {
+    _detailAnimeState = _detailAnimeState.copyWith(
+        rating: rating
+    );
+    notifyListeners();
+  }
+  void reSetCommendWriteState(){
+    _detailAnimeState = _detailAnimeState.copyWith(
+        rating: 0,
+        spoiler: false,
+    );
+    textController.text = '';
+    notifyListeners();
+  }
+
   @override
   void dispose() {
     pageController.dispose();
+    textController.dispose();
     super.dispose();
   }
 }

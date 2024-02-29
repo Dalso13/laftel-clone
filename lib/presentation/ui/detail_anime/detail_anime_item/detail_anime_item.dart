@@ -5,7 +5,6 @@ import 'package:laftel_clone/domain/model/detail_anime_model.dart';
 import 'package:laftel_clone/presentation/ui/detail_anime/detail_anime_item/detail_anime_banner.dart';
 import 'package:laftel_clone/presentation/ui/detail_anime/detail_anime_item/detail_anime_episode/detail_anime_episode_screen.dart';
 import 'package:laftel_clone/presentation/ui/detail_anime/detail_anime_item/detail_anime_related/detail_anime_related_screen.dart';
-import 'package:laftel_clone/presentation/ui/detail_anime/detail_anime_item/user_comment/comment_write_screen.dart';
 import 'package:laftel_clone/presentation/ui/detail_anime/detail_anime_item/user_comment/user_comment_screen.dart';
 import 'package:laftel_clone/presentation/view_model/view_model_state/detail_anime_state.dart';
 
@@ -18,6 +17,7 @@ class DetailAnimeItem extends StatelessWidget {
   final void Function({required DetailAnimeMenuState menuState}) _onSelected;
   final void Function({required int index}) _dragPageChange;
   final PageController _controller;
+  final void Function() _goWriteScreen;
 
   const DetailAnimeItem({
     super.key,
@@ -28,12 +28,14 @@ class DetailAnimeItem extends StatelessWidget {
         onSelected,
     required void Function({required int index}) dragPageChange,
     required PageController controller,
+    required void Function() goWriteScreen,
   })  : _model = model,
         _state = state,
         _onTab = onTab,
         _onSelected = onSelected,
         _controller = controller,
-        _dragPageChange = dragPageChange;
+        _dragPageChange = dragPageChange,
+        _goWriteScreen = goWriteScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -94,23 +96,10 @@ class DetailAnimeItem extends StatelessWidget {
               model: _model,
               onTab: _onTab,
             ),
-            UserCommentScreen(rating: _model.avgRating, goWriteScreen: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                shape: const RoundedRectangleBorder(
-                    borderRadius:
-                    BorderRadius.vertical(top: Radius.circular(8))),
-                builder: (context) {
-                  return DraggableScrollableSheet(
-                    expand: false,
-                    minChildSize: 0.3,
-                    initialChildSize: 0.5,
-                    builder: (context, scrollController) => const CommentWriteScreen(),
-                  );
-                },
-              );
-            }),
+            UserCommentScreen(
+              rating: _model.avgRating,
+              goWriteScreen: _goWriteScreen,
+            ),
             DetailAnimeRelatedScreen(
               relatedList: _model.relatedItem,
               onTab: _onTab,

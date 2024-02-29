@@ -12,7 +12,8 @@ part 'detail_anime_state.g.dart';
 class DetailAnimeState with _$DetailAnimeState {
   const factory DetailAnimeState({
     @Default(ResponseState.loading) ResponseState detailResponseState,
-    @Default(1) double seriesScreenHeight,
+    @Default(0.0) double rating,
+    @Default(false) bool spoiler,
     @Default(DetailAnimeMenuState.episode) DetailAnimeMenuState menuState,
   }) = _DetailAnimeState;
 
