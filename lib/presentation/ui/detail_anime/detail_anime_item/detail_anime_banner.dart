@@ -5,11 +5,14 @@ import 'detail_anime_more_screen.dart';
 
 class DetailAnimeBanner extends StatelessWidget {
   final DetailAnimeModel _model;
+  final void Function() _goEpisodeBuyPage;
 
   const DetailAnimeBanner({
     super.key,
     required DetailAnimeModel model,
-  }) : _model = model;
+    required void Function() goEpisodeBuyPage,
+  })  : _model = model,
+        _goEpisodeBuyPage = goEpisodeBuyPage;
 
   @override
   Widget build(BuildContext context) {
@@ -111,11 +114,11 @@ class DetailAnimeBanner extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               fontSize: 16)),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 8.0),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
                       child: Row(
                         children: [
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Column(
                               children: [
@@ -133,19 +136,22 @@ class DetailAnimeBanner extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: Column(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.playlist_play,
                                   color: Colors.white,
                                   size: 28,
                                 ),
-                                Text(
-                                  '에피소드 구매',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
+                                TextButton(
+                                  onPressed: _goEpisodeBuyPage,
+                                  child: const Text(
+                                    '에피소드 구매',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                    ),
                                   ),
                                 ),
                               ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laftel_clone/core/response_state.dart';
+import 'package:laftel_clone/presentation/ui/detail_anime/detail_anime_item/detail_anime_episode/episode_buy/episode_buy_page.dart';
 import 'package:laftel_clone/presentation/view_model/detail_anime_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -74,6 +75,17 @@ class _DetailAnimeScreenState extends State<DetailAnimeScreen> {
                     },
                   ).then(
                     (value) => viewModel.reSetCommendWriteState(),
+                  );
+                },
+                goEpisodeBuyPage: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChangeNotifierProvider.value(
+                        value: viewModel,
+                        child: const EpisodeBuyPage(),
+                      ),
+                    ),
                   );
                 },
               ),

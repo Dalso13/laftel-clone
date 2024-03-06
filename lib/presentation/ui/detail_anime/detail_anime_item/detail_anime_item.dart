@@ -18,6 +18,7 @@ class DetailAnimeItem extends StatelessWidget {
   final void Function({required int index}) _dragPageChange;
   final PageController _controller;
   final void Function() _goWriteScreen;
+  final void Function() _goEpisodeBuyPage;
 
   const DetailAnimeItem({
     super.key,
@@ -29,13 +30,15 @@ class DetailAnimeItem extends StatelessWidget {
     required void Function({required int index}) dragPageChange,
     required PageController controller,
     required void Function() goWriteScreen,
+    required void Function() goEpisodeBuyPage,
   })  : _model = model,
         _state = state,
         _onTab = onTab,
         _onSelected = onSelected,
         _controller = controller,
         _dragPageChange = dragPageChange,
-        _goWriteScreen = goWriteScreen;
+        _goWriteScreen = goWriteScreen,
+        _goEpisodeBuyPage = goEpisodeBuyPage;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +70,7 @@ class DetailAnimeItem extends StatelessWidget {
                   ),
                   DetailAnimeBanner(
                     model: _model,
+                    goEpisodeBuyPage: _goEpisodeBuyPage,
                   ),
                 ],
               ),
