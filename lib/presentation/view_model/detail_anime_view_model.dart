@@ -87,6 +87,34 @@ class DetailAnimeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void episodeAllSelect() {
+    List<int> allSelect = [];
+    if(detailAnimeState.selectEpisode.length != 10) {
+      allSelect.addAll([1,2,3,4,5,6,7,8,9,10]);
+    }
+    _detailAnimeState = _detailAnimeState.copyWith(
+      selectEpisode: allSelect
+    );
+    notifyListeners();
+  }
+
+  void episodeSorting() {
+    _detailAnimeState = _detailAnimeState.copyWith(
+        episodeSorting: !_detailAnimeState.episodeSorting
+    );
+    notifyListeners();
+  }
+
+  void episodeSelect({required int id}) {
+    final allSelect = _detailAnimeState.selectEpisode.toList();
+
+    allSelect.contains(id) ? allSelect.remove(id) : allSelect.add(id);
+    _detailAnimeState = _detailAnimeState.copyWith(
+        selectEpisode: allSelect
+    );
+    notifyListeners();
+  }
+
   @override
   void dispose() {
     pageController.dispose();

@@ -15,6 +15,8 @@ class DetailAnimeState with _$DetailAnimeState {
     @Default(0.0) double rating,
     @Default(false) bool spoiler,
     @Default(DetailAnimeMenuState.episode) DetailAnimeMenuState menuState,
+    @Default([]) List<int> selectEpisode,
+    @Default(false) bool episodeSorting,
   }) = _DetailAnimeState;
 
   factory DetailAnimeState.fromJson(Map<String, Object?> json) => _$DetailAnimeStateFromJson(json);

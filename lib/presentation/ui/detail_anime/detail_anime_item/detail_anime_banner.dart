@@ -135,26 +135,26 @@ class DetailAnimeBanner extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                const Icon(
-                                  Icons.playlist_play,
-                                  color: Colors.white,
-                                  size: 28,
-                                ),
-                                TextButton(
-                                  onPressed: _goEpisodeBuyPage,
-                                  child: const Text(
+                          InkWell(
+                            onTap: _goEpisodeBuyPage,
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    Icons.playlist_play,
+                                    color: Colors.white,
+                                    size: 28,
+                                  ),
+                                  Text(
                                     '에피소드 구매',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 12,
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ],
