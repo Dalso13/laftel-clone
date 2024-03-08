@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/detail_anime_menu_state.dart';
 import 'detail_anime_item/detail_anime_item.dart';
+import 'detail_anime_item/detail_anime_more_menu.dart';
 import 'detail_anime_item/user_comment/comment_write_screen.dart';
 
 class DetailAnimeScreen extends StatefulWidget {
@@ -86,6 +87,25 @@ class _DetailAnimeScreenState extends State<DetailAnimeScreen> {
                         child: const EpisodeBuyPage(),
                       ),
                     ),
+                  ).then((value) {
+                    viewModel.episodeAllSelect(listEmpty: true);
+                  });
+                },
+                moreMenu: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(8))),
+                    builder: (context) {
+                      return DraggableScrollableSheet(
+                        expand: false,
+                        initialChildSize: 0.3,
+                        builder: (context, scrollController) =>
+                        const DetailAnimeMoreMenu(),
+                      );
+                    },
                   );
                 },
               ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:laftel_clone/core/detail_anime_menu_state.dart';
 import 'package:laftel_clone/domain/model/detail_anime_model.dart';
 import 'package:laftel_clone/presentation/ui/detail_anime/detail_anime_item/detail_anime_banner.dart';
@@ -19,6 +18,7 @@ class DetailAnimeItem extends StatelessWidget {
   final PageController _controller;
   final void Function() _goWriteScreen;
   final void Function() _goEpisodeBuyPage;
+  final void Function() _moreMenu;
 
   const DetailAnimeItem({
     super.key,
@@ -31,6 +31,7 @@ class DetailAnimeItem extends StatelessWidget {
     required PageController controller,
     required void Function() goWriteScreen,
     required void Function() goEpisodeBuyPage,
+    required void Function() moreMenu,
   })  : _model = model,
         _state = state,
         _onTab = onTab,
@@ -38,7 +39,8 @@ class DetailAnimeItem extends StatelessWidget {
         _controller = controller,
         _dragPageChange = dragPageChange,
         _goWriteScreen = goWriteScreen,
-        _goEpisodeBuyPage = goEpisodeBuyPage;
+        _goEpisodeBuyPage = goEpisodeBuyPage,
+        _moreMenu = moreMenu;
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +58,21 @@ class DetailAnimeItem extends StatelessWidget {
                 icon: const Icon(Icons.arrow_back_ios),
                 color: Colors.grey,
                 onPressed: () {
-                  context.pop();
+                  Navigator.pop(context);
                 },
               ),
+              actions: [
+                IconButton(
+                  color: Colors.grey,
+                  onPressed: () {},
+                  icon: const Icon(Icons.share_rounded),
+                ),
+                IconButton(
+                  color: Colors.grey,
+                  onPressed: _moreMenu,
+                  icon: const Icon(Icons.more_vert_outlined),
+                ),
+              ],
               flexibleSpace: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [

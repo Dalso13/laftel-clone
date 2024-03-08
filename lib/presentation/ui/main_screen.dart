@@ -48,21 +48,17 @@ class _MainScreenState extends State<MainScreen> {
               SliverAppBar(
                 floating: false,
                 pinned: true,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(Icons.currency_bitcoin),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Icon(Icons.doorbell),
-                        ),
-                        Icon(Icons.search),
-                      ],
-                    ),
-                  ],
-                ),
+                leading: Icon(Icons.watch_later_outlined),
+                actions: [
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(Icons.notifications_none_outlined),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(Icons.search),
+                  ),
+                ],
               ),
             ],
           ),

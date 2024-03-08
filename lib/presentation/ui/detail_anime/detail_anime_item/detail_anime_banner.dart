@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:laftel_clone/presentation/ui/anime_option_item/ad_free_item.dart';
+import 'package:laftel_clone/presentation/ui/anime_option_item/laftel_only_item.dart';
+import 'package:laftel_clone/presentation/ui/anime_option_item/original_item.dart';
 
 import '../../../../domain/model/detail_anime_model.dart';
 import 'detail_anime_more_screen.dart';
@@ -43,8 +46,8 @@ class DetailAnimeBanner extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
-                        color: Colors.black.withOpacity(0.75),
-                        margin: const EdgeInsets.only(right: 4.0, left: 4),
+                        color: Colors.black.withOpacity(0.65),
+                        margin: const EdgeInsets.only(right: 4.0, left: 8),
                         padding: const EdgeInsets.only(right: 4.0, left: 4),
                         child: Row(
                           children: [
@@ -53,11 +56,16 @@ class DetailAnimeBanner extends StatelessWidget {
                               child: Icon(Icons.star,
                                   color: Colors.white, size: 14),
                             ),
-                            Text('${_model.avgRating}',
-                                style: const TextStyle(color: Colors.white)),
+                            Text(
+                              '${_model.avgRating}',
+                              style: const TextStyle(color: Colors.white),
+                            ),
                           ],
                         ),
                       ),
+                      if (_model.animationInfo.isLaftelOriginal) const OriginalItem(),
+                      if (_model.animationInfo.isLaftelOnly) const LaftelOnlyItem(),
+                      if (_model.animationInfo.isDubbed) const AdFreeItem(),
                     ],
                   ),
                 ),

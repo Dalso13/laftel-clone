@@ -95,6 +95,46 @@ class EpisodeBuyPage extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: state.selectEpisode.isNotEmpty
+          ? Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: () {},
+                    child: Container(
+                      color: Theme.of(context).shadowColor,
+                      padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                      child: const Text(
+                        '7일대여',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {},
+                    child: Container(
+                      color: Theme.of(context).primaryColor,
+                      padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                      child: const Text(
+                        '소장',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : const SizedBox.shrink(),
     );
   }
 }
