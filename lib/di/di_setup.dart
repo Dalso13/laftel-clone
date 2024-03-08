@@ -10,6 +10,7 @@ import 'package:laftel_clone/domain/use_case/get_anime_data_use_case/interface/g
 import 'package:laftel_clone/domain/use_case/get_anime_data_use_case/interface/get_quarter_anime.dart';
 import 'package:laftel_clone/presentation/view_model/detail_anime_view_model.dart';
 import 'package:laftel_clone/presentation/view_model/main_view_model.dart';
+import 'package:laftel_clone/presentation/view_model/storage_box_view_model.dart';
 
 final getIt = GetIt.instance;
 
@@ -40,5 +41,8 @@ void diSetup() {
         () => DetailAnimeViewModel(
       getDetailAnime: getIt<GetDetailAnime>(),
     ),
+  );
+  getIt.registerFactory<StorageBoxViewModel>(
+        () => StorageBoxViewModel(),
   );
 }

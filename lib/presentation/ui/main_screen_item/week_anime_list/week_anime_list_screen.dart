@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/week_state.dart';
-import '../../view_model/main_view_model.dart';
-import '../main_screen_item/detail_item/preview_anime_item.dart';
-import '../main_screen_item/detail_item/week_change_item.dart';
+import '../../../../core/week_state.dart';
+import '../../../view_model/main_view_model.dart';
+import '../detail_item/preview_anime_item.dart';
+import '../detail_item/week_change_item.dart';
 
 class WeekAnimeListScreen extends StatelessWidget {
   final void Function({required int id}) _onTab;
