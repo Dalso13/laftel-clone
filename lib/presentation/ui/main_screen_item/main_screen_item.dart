@@ -11,7 +11,6 @@ import '../../../core/Popular_anime_state.dart';
 import '../../../core/week_state.dart';
 import '../../ui_sealed/week_anime_event_sealed.dart';
 import '../../view_model/main_view_model.dart';
-import '../anime_option_item/laftel_only_item.dart';
 import 'banner_item.dart';
 import 'feedback_item.dart';
 import 'membership_item.dart';
@@ -108,7 +107,6 @@ class MainScreenItem extends StatelessWidget {
                   ),
                   ...state.themeAnimeList
                       .map((e) => ThemeRecommendItem(model: e)),
-                  const LaftelOnlyItem(),
                   const FeedbackItem(),
                 ],
               )

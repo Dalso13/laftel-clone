@@ -12,6 +12,7 @@ class MainViewModel extends ChangeNotifier {
 
   final GetQuarterAnime _getQuarterAnime;
   MainState _mainState = const MainState();
+  final PageController pageController = PageController(initialPage: 0);
 
   MainViewModel({
     required GetQuarterAnime getQuarterAnime,
@@ -70,5 +71,21 @@ class MainViewModel extends ChangeNotifier {
     _mainState = _mainState.copyWith(
         themeAnimeList: themeAnimeList
     );
+  }
+
+  void changeScreen(int index) {
+    pageController.jumpToPage(
+      index,
+    );
+    _mainState = _mainState.copyWith(
+      currentPage: index
+    );
+    notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
 }

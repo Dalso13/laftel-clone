@@ -13,6 +13,7 @@ part 'main_state.g.dart';
 @freezed
 class MainState with _$MainState {
   const factory MainState({
+    @Default(0) int currentPage,
     @Default(WeekState.sunday) WeekState currentWeek,
     @Default([]) List<SimpleAnimeModel> weekAnimeList,
     @Default([]) List<ThemeAnimeModel> themeAnimeList,
