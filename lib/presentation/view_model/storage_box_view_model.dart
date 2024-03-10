@@ -19,4 +19,10 @@ class StorageBoxViewModel extends ChangeNotifier {
     );
     notifyListeners();
   }
+
+  void snapMenuChange(int index) {
+    final changeMenu = StorageBoxMenuState.values.where((e) => e.idx == index).toList();
+    _state = _state.copyWith(currentMenu: changeMenu.first);
+    notifyListeners();
+  }
 }

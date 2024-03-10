@@ -29,9 +29,10 @@ class StorageBoxScreen extends StatelessWidget {
           const Divider(),
           Expanded(
             child: PageView(
+              onPageChanged: viewModel.snapMenuChange,
               controller: viewModel.pageController,
               children: StorageBoxMenuState.values.map((e) {
-                return const StorageBoxMenuScreen();
+                return StorageBoxMenuScreen(state: e,);
               }).toList()
             ),
           ),
