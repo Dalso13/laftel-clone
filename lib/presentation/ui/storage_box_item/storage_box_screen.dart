@@ -15,7 +15,11 @@ class StorageBoxScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('보관함'),
+        title: const Text('보관함',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            )),
       ),
       body: Column(
         children: [
@@ -29,12 +33,13 @@ class StorageBoxScreen extends StatelessWidget {
           const Divider(),
           Expanded(
             child: PageView(
-              onPageChanged: viewModel.snapMenuChange,
-              controller: viewModel.pageController,
-              children: StorageBoxMenuState.values.map((e) {
-                return StorageBoxMenuScreen(state: e,);
-              }).toList()
-            ),
+                onPageChanged: viewModel.snapMenuChange,
+                controller: viewModel.pageController,
+                children: StorageBoxMenuState.values.map((e) {
+                  return StorageBoxMenuScreen(
+                    state: e,
+                  );
+                }).toList()),
           ),
         ],
       ),

@@ -4,17 +4,16 @@ import 'package:laftel_clone/presentation/view_model/view_model_state/storage_bo
 
 class StorageBoxViewModel extends ChangeNotifier {
   StorageBoxState _state = const StorageBoxState();
-  final pageController = PageController();
+  final pageController = PageController(keepPage: true);
 
   StorageBoxState get state => _state;
-
 
   void clickMenuChange({required StorageBoxMenuState currentMenu}) {
     if(currentMenu == _state.currentMenu) return;
     _state = _state.copyWith(currentMenu: currentMenu);
     pageController.animateToPage(
       currentMenu.idx,
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 300),
       curve: Curves.linear,
     );
     notifyListeners();
@@ -24,5 +23,11 @@ class StorageBoxViewModel extends ChangeNotifier {
     final changeMenu = StorageBoxMenuState.values.where((e) => e.idx == index).toList();
     _state = _state.copyWith(currentMenu: changeMenu.first);
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
 }

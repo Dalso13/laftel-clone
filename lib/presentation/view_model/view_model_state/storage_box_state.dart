@@ -9,7 +9,7 @@ part 'storage_box_state.g.dart';
 @freezed
 class StorageBoxState with _$StorageBoxState {
   const factory StorageBoxState({
-    @Default(StorageBoxMenuState.bought) StorageBoxMenuState currentMenu,
+    @Default(StorageBoxMenuState.recent) StorageBoxMenuState currentMenu,
   }) = _StorageBoxState;
 
   factory StorageBoxState.fromJson(Map<String, Object?> json) => _$StorageBoxStateFromJson(json);

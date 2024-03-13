@@ -18,7 +18,10 @@ class StorageBoxMenuScreen extends StatelessWidget {
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('작품 (0)'),
+            Padding(
+              padding: EdgeInsets.only(left: 8.0),
+              child: Text('작품 (0)'),
+            ),
           ],
         ),
         Expanded(
