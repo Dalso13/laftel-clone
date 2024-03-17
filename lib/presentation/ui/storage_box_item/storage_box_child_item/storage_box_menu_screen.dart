@@ -1,27 +1,33 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/storage_box_menu_state.dart';
 
 class StorageBoxMenuScreen extends StatelessWidget {
   final StorageBoxMenuState _state;
+  final Widget Function({required StorageBoxMenuState state}) _sortButton;
 
   const StorageBoxMenuScreen({
     super.key,
     required StorageBoxMenuState state,
-  }) : _state = state;
+    required Widget Function({required StorageBoxMenuState state}) sortButton,
+  })  : _state = state,
+        _sortButton = sortButton;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: EdgeInsets.only(left: 8.0),
-              child: Text('작품 (0)'),
+            const Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(left: 8.0),
+                child: Text('작품 (0)'),
+              ),
             ),
+            _sortButton(state : _state),
           ],
         ),
         Expanded(
@@ -35,7 +41,7 @@ class StorageBoxMenuScreen extends StatelessWidget {
 
   String emptyText() {
     String text;
-    switch(_state) {
+    switch (_state) {
       case StorageBoxMenuState.recent:
         text = '최근 본 작품이 아직 없어요.';
       case StorageBoxMenuState.want:
@@ -49,5 +55,4 @@ class StorageBoxMenuScreen extends StatelessWidget {
     }
     return text;
   }
-
 }
