@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:laftel_clone/core/storage_box_sort_state.dart';
 import 'package:laftel_clone/presentation/ui/storage_box_item/storage_box_child_item/storage_box_menu.dart';
 import 'package:laftel_clone/presentation/ui/storage_box_item/storage_box_child_item/storage_box_menu_screen.dart';
+import 'package:laftel_clone/presentation/ui/storage_box_item/storage_box_child_item/want_menu_sort_screen.dart';
 import 'package:laftel_clone/presentation/ui/storage_box_item/storage_keep_alive_screen.dart';
 import 'package:laftel_clone/presentation/view_model/storage_box_view_model.dart';
 import 'package:provider/provider.dart';
@@ -43,17 +45,96 @@ class StorageBoxScreen extends StatelessWidget {
                     child: StorageBoxMenuScreen(
                       state: e,
                       sortButton: ({required StorageBoxMenuState state}) {
+                        void onPressed({required Widget widget}) {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (context) {
+                              return DraggableScrollableSheet(
+                                  expand: false,
+                                  minChildSize: 0.2,
+                                  initialChildSize: 0.5,
+                                  builder: (context, scrollController) =>
+                                      widget);
+                            },
+                          );
+                        }
+
+                        Widget cancel() {
+                          return ListTile(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            leading: const Icon(null),
+                            title: const Text('취소'),
+                          );
+                        }
+
                         switch (state) {
                           case StorageBoxMenuState.recent:
                             return const SizedBox.shrink();
                           case StorageBoxMenuState.want:
-                            return sortButton(onPressed: () {}, text: viewModel.state.currentWantMenuSortState.kr);
+                            return sortButton(
+                                onPressed: () {
+                                  onPressed(
+                                      widget: Column(
+                                    children: [
+                                      ...StorageWantState.values
+                                          .map((e) => MenuSortScreen(
+                                              onChanged: () {},
+                                              isEqual: e ==
+                                                  viewModel.state
+                                                      .currentWantMenuSortState,
+                                              menuText: e.kr))
+                                          .toList(),
+                                      cancel(),
+                                    ],
+                                  ));
+                                },
+                                text: viewModel
+                                    .state.currentWantMenuSortState.kr);
                           case StorageBoxMenuState.download:
                             return const SizedBox.shrink();
                           case StorageBoxMenuState.bought:
-                            return sortButton(onPressed: () {}, text: viewModel.state.currentBoughtMenuSortState.kr);
+                            return sortButton(
+                                onPressed: () {
+                                  onPressed(
+                                      widget: Column(
+                                    children: [
+                                      ...StorageBoughtState.values
+                                          .map((e) => MenuSortScreen(
+                                              onChanged: () {},
+                                              isEqual: e ==
+                                                  viewModel.state
+                                                      .currentBoughtMenuSortState,
+                                              menuText: e.kr))
+                                          .toList(),
+                                      cancel(),
+                                    ],
+                                  ));
+                                },
+                                text: viewModel
+                                    .state.currentBoughtMenuSortState.kr);
                           case StorageBoxMenuState.relay:
-                            return sortButton(onPressed: () {}, text: viewModel.state.currentRelayMenuSortState.kr);
+                            return sortButton(
+                                onPressed: () {
+                                  onPressed(
+                                      widget: Column(
+                                    children: [
+                                      ...StorageRelayState.values
+                                          .map((e) => MenuSortScreen(
+                                              onChanged: () {},
+                                              isEqual: e ==
+                                                  viewModel.state
+                                                      .currentRelayMenuSortState,
+                                              menuText: e.kr))
+                                          .toList(),
+                                      cancel(),
+                                    ],
+                                  ));
+                                },
+                                text: viewModel
+                                    .state.currentRelayMenuSortState.kr);
                         }
                       },
                     ),
@@ -81,12 +162,14 @@ class StorageBoxScreen extends StatelessWidget {
         return icon;
     }
   }
-  Widget sortButton({required void Function() onPressed, required String text}) {
+
+  Widget sortButton(
+      {required void Function() onPressed, required String text}) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextButton.icon(
         style: TextButton.styleFrom(iconColor: Colors.grey[700]),
-        onPressed: () {},
+        onPressed: onPressed,
         icon: const SizedBox(child: Icon(Icons.keyboard_arrow_down_sharp)),
         label: Text(
           text,
