@@ -23,7 +23,7 @@ class StorageBoxMenuScreen extends StatelessWidget {
           children: [
             const Expanded(
               child: Padding(
-                padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsets.only(left: 8.0, top: 8.0),
                 child: Text('작품 (0)'),
               ),
             ),

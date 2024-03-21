@@ -81,7 +81,10 @@ class StorageBoxScreen extends StatelessWidget {
                                     children: [
                                       ...StorageWantState.values
                                           .map((e) => MenuSortScreen(
-                                              onChanged: () {},
+                                              onChanged: () {
+                                                viewModel.wantSortMenuChange(state: e);
+                                                Navigator.pop(context);
+                                              },
                                               isEqual: e ==
                                                   viewModel.state
                                                       .currentWantMenuSortState,
@@ -103,7 +106,10 @@ class StorageBoxScreen extends StatelessWidget {
                                     children: [
                                       ...StorageBoughtState.values
                                           .map((e) => MenuSortScreen(
-                                              onChanged: () {},
+                                              onChanged: () {
+                                                viewModel.boughtSortMenuChange(state: e);
+                                                Navigator.pop(context);
+                                              },
                                               isEqual: e ==
                                                   viewModel.state
                                                       .currentBoughtMenuSortState,
@@ -123,7 +129,10 @@ class StorageBoxScreen extends StatelessWidget {
                                     children: [
                                       ...StorageRelayState.values
                                           .map((e) => MenuSortScreen(
-                                              onChanged: () {},
+                                              onChanged: () {
+                                                viewModel.relaySortMenuChange(state: e);
+                                                Navigator.pop(context);
+                                              },
                                               isEqual: e ==
                                                   viewModel.state
                                                       .currentRelayMenuSortState,
