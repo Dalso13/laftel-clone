@@ -3,6 +3,7 @@ import 'package:laftel_clone/di/di_setup.dart';
 import 'package:laftel_clone/presentation/ui/main_screen.dart';
 import 'package:laftel_clone/presentation/view_model/detail_anime_view_model.dart';
 import 'package:laftel_clone/presentation/view_model/main_view_model.dart';
+import 'package:laftel_clone/presentation/view_model/search_view_model.dart';
 import 'package:laftel_clone/presentation/view_model/storage_box_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +19,7 @@ final router = GoRouter(
         providers: [
           ChangeNotifierProvider(create: (_) => getIt<MainViewModel>()),
           ChangeNotifierProvider(create: (_) => getIt<StorageBoxViewModel>()),
+          ChangeNotifierProvider(create: (_) => getIt<SearchViewModel>()),
         ],
         child: const MainScreen(),
       ),

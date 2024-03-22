@@ -3,19 +3,19 @@ import 'package:laftel_clone/core/Popular_anime_state.dart';
 import 'package:laftel_clone/core/get_quarter.dart';
 import 'package:laftel_clone/core/get_week_state.dart';
 import 'package:laftel_clone/core/week_state.dart';
-import 'package:laftel_clone/domain/use_case/get_anime_data_use_case/interface/get_quarter_anime.dart';
+import 'package:laftel_clone/domain/use_case/get_anime_data_use_case/interface/get_specific_anime.dart';
 import 'package:laftel_clone/presentation/view_model/view_model_state/main_state.dart';
 
 import '../../domain/model/simple_anime_model.dart';
 
 class MainViewModel extends ChangeNotifier {
 
-  final GetQuarterAnime _getQuarterAnime;
+  final GetSpecificAnime _getQuarterAnime;
   MainState _mainState = const MainState();
   final PageController pageController = PageController(initialPage: 0);
 
   MainViewModel({
-    required GetQuarterAnime getQuarterAnime,
+    required GetSpecificAnime getQuarterAnime,
   }) : _getQuarterAnime = getQuarterAnime;
 
   MainState get mainState => _mainState;

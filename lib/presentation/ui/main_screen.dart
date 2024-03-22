@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/main_screen_item.dart';
+import 'package:laftel_clone/presentation/ui/search_screen_item/search_screen.dart';
 import 'package:laftel_clone/presentation/ui/storage_box_item/storage_box_screen.dart';
 import 'package:laftel_clone/presentation/view_model/main_view_model.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
         pageSnapping: false,
         children: [
           const MainScreenItem(),
-          Container(),
+          const SearchScreen(),
           const StorageBoxScreen(),
           Container()
         ],
