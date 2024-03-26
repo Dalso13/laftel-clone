@@ -29,11 +29,11 @@ class SearchScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text('선택된 필터'),
                 ),
-                TextButton(onPressed: () {}, child: Text('필터'))
+                TextButton(onPressed: () {}, child: const Text('필터'))
               ],
             ),
           ),
@@ -46,19 +46,22 @@ class SearchScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Text(
+                      const Text(
                         '총 ',
                         style: TextStyle(fontSize: 13),
                       ),
                       Text(
-                        '3073',
-                        style: TextStyle(fontSize: 13),
+                        '${state.searchAnimeListCount}',
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      Text(
+                      const Text(
                         '개의 작품이 감지되었어요!',
                         style: TextStyle(fontSize: 13),
                       )
@@ -70,19 +73,21 @@ class SearchScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: GridView.count(
-            crossAxisCount: 2,
-            children: state.searchAnimeList
-                .map(
-                  (e) => PreviewAnimeItem(
-                    model: e,
-                    onTab: ({required int id}) {
-                      context.push('/detail-anime', extra: id);
-                    },
-                  ),
-                )
-                .toList(),
-          ))
+            child: GridView.count(
+              crossAxisCount: 2,
+              controller: viewModel.scrollController,
+              children: state.searchAnimeList
+                  .map(
+                    (e) => PreviewAnimeItem(
+                      model: e,
+                      onTab: ({required int id}) {
+                        context.push('/detail-anime', extra: id);
+                      },
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
         ],
       ),
     );

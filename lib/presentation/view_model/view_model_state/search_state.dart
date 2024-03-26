@@ -10,6 +10,7 @@ part 'search_state.g.dart';
 class SearchState with _$SearchState {
   const factory SearchState({
     @Default([]) List<SimpleAnimeModel> searchAnimeList,
+    @Default(false) bool isPagination,
     @Default(0) int searchAnimeListCount,
     @Default('') String nextUri,
   }) = _SearchState;

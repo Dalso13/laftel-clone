@@ -7,11 +7,13 @@ import '../../domain/use_case/get_anime_data_use_case/interface/get_search_anime
 class SearchViewModel extends ChangeNotifier {
   SearchState _state = const SearchState();
   final GetSearchAnime _getSearchAnime;
+  final scrollController = ScrollController();
 
   SearchViewModel({
     required GetSearchAnime getSearchAnime,
   }) : _getSearchAnime = getSearchAnime {
     searchAnimeList();
+    _pagination();
   }
 
   SearchState get state => _state;
@@ -31,14 +33,33 @@ class SearchViewModel extends ChangeNotifier {
    notifyListeners();
   }
 
-  void nextAnimeList() async {
-    final list = await _getSearchAnime.getNextAnime(next: _state.nextUri);
-
+  void _nextAnimeList() async {
     _state = _state.copyWith(
-      searchAnimeList: list.model,
-      nextUri: list.next,
-      searchAnimeListCount: list.count,
+      isPagination: true,
     );
     notifyListeners();
+    final list = await _getSearchAnime.getNextAnime(next: _state.nextUri);
+
+    final model = state.searchAnimeList.toList()..addAll(list.model);
+
+
+    _state = _state.copyWith(
+      searchAnimeList: model,
+      nextUri: list.next,
+      searchAnimeListCount: list.count,
+      isPagination: false,
+    );
+    notifyListeners();
+  }
+
+  void _pagination(){
+    scrollController.addListener(() {
+      //print('1');
+      if(state.isPagination)return;
+      if (scrollController.position.maxScrollExtent == scrollController.offset) {
+        _nextAnimeList();
+        //print('1');
+      }
+    });
   }
 }
