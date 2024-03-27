@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/detail_item/preview_anime_item.dart';
+import 'package:laftel_clone/presentation/ui/search_screen_item/search_screen_item/tag_drawer_menu.dart';
 import 'package:laftel_clone/presentation/view_model/search_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -12,10 +13,23 @@ class SearchScreen extends StatelessWidget {
     final viewModel = context.watch<SearchViewModel>();
     final state = viewModel.state;
     return Scaffold(
+      key: viewModel.scaffoldKey,
+      drawerEnableOpenDragGesture: false,
+      endDrawer: const Drawer(
+        child: TagDrawerMenu(),
+      ),
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('태그검색'),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
+        title: const Text(
+          '태그검색',
+          style: TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+        ],
       ),
       body: Column(
         children: [
@@ -33,7 +47,11 @@ class SearchScreen extends StatelessWidget {
                   padding: EdgeInsets.all(8.0),
                   child: Text('선택된 필터'),
                 ),
-                TextButton(onPressed: () {}, child: const Text('필터'))
+                TextButton(
+                    onPressed: () {
+                      viewModel.scaffoldKey.currentState!.openEndDrawer();
+                    },
+                    child: const Text('필터'))
               ],
             ),
           ),
@@ -75,6 +93,9 @@ class SearchScreen extends StatelessWidget {
           Expanded(
             child: GridView.count(
               crossAxisCount: 2,
+              crossAxisSpacing: 15,
+              padding:
+                  const EdgeInsets.only(left: 8, right: 8, bottom: 16, top: 16),
               controller: viewModel.scrollController,
               children: state.searchAnimeList
                   .map(

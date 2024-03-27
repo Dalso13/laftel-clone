@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:laftel_clone/core/tag_state.dart';
 import 'package:laftel_clone/presentation/view_model/view_model_state/search_state.dart';
 
 import '../../domain/use_case/get_anime_data_use_case/interface/get_search_anime.dart';
@@ -8,6 +9,7 @@ class SearchViewModel extends ChangeNotifier {
   SearchState _state = const SearchState();
   final GetSearchAnime _getSearchAnime;
   final scrollController = ScrollController();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   SearchViewModel({
     required GetSearchAnime getSearchAnime,
@@ -52,6 +54,15 @@ class SearchViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addTag(TagState tag) {
+    final tagList = state.checkTag.toList()..add(tag);
+
+    _state = _state.copyWith(
+      checkTag: tagList,
+    );
+    notifyListeners();
+  }
+
   void _pagination(){
     scrollController.addListener(() {
       //print('1');
@@ -61,5 +72,11 @@ class SearchViewModel extends ChangeNotifier {
         //print('1');
       }
     });
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 }

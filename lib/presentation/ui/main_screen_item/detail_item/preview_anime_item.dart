@@ -28,10 +28,13 @@ class PreviewAnimeItem extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Image.network(_model.img,
-                  fit: BoxFit.cover,
-                  height: 110,
-                  width: double.infinity),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(_model.img,
+                    fit: BoxFit.cover,
+                    height: 110,
+                    width: double.infinity),
+              ),
               Positioned(
                 bottom: 0,
                 right: 4,

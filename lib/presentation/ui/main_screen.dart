@@ -30,6 +30,7 @@ class _MainScreenState extends State<MainScreen> {
       body: PageView(
         controller: viewModel.pageController,
         pageSnapping: false,
+        physics: const NeverScrollableScrollPhysics(),
         children: [
           const MainScreenItem(),
           const SearchScreen(),

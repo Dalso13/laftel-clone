@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:laftel_clone/core/storage_box_sort_state.dart';
 import 'package:laftel_clone/presentation/ui/storage_box_item/storage_box_child_item/storage_box_menu.dart';
 import 'package:laftel_clone/presentation/ui/storage_box_item/storage_box_child_item/storage_box_menu_screen.dart';
-import 'package:laftel_clone/presentation/ui/storage_box_item/storage_box_child_item/want_menu_sort_screen.dart';
+import 'package:laftel_clone/presentation/ui/storage_box_item/storage_box_child_item/menu_sort_screen.dart';
 import 'package:laftel_clone/presentation/ui/storage_box_item/storage_keep_alive_screen.dart';
 import 'package:laftel_clone/presentation/view_model/storage_box_view_model.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +53,6 @@ class StorageBoxScreen extends StatelessWidget {
                               return DraggableScrollableSheet(
                                   expand: false,
                                   minChildSize: 0.2,
-                                  initialChildSize: 0.5,
                                   builder: (context, scrollController) =>
                                       widget);
                             },
@@ -77,21 +76,24 @@ class StorageBoxScreen extends StatelessWidget {
                             return sortButton(
                                 onPressed: () {
                                   onPressed(
-                                      widget: Column(
-                                    children: [
-                                      ...StorageWantState.values
-                                          .map((e) => MenuSortScreen(
-                                              onChanged: () {
-                                                viewModel.wantSortMenuChange(state: e);
-                                                Navigator.pop(context);
-                                              },
-                                              isEqual: e ==
-                                                  viewModel.state
-                                                      .currentWantMenuSortState,
-                                              menuText: e.kr))
-                                          .toList(),
-                                      cancel(),
-                                    ],
+                                      widget: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        ...StorageWantState.values
+                                            .map((e) => MenuSortScreen(
+                                                onChanged: () {
+                                                  viewModel.wantSortMenuChange(
+                                                      state: e);
+                                                  Navigator.pop(context);
+                                                },
+                                                isEqual: e ==
+                                                    viewModel.state
+                                                        .currentWantMenuSortState,
+                                                menuText: e.kr))
+                                            .toList(),
+                                        cancel(),
+                                      ],
+                                    ),
                                   ));
                                 },
                                 text: viewModel
@@ -107,7 +109,8 @@ class StorageBoxScreen extends StatelessWidget {
                                       ...StorageBoughtState.values
                                           .map((e) => MenuSortScreen(
                                               onChanged: () {
-                                                viewModel.boughtSortMenuChange(state: e);
+                                                viewModel.boughtSortMenuChange(
+                                                    state: e);
                                                 Navigator.pop(context);
                                               },
                                               isEqual: e ==
@@ -130,7 +133,8 @@ class StorageBoxScreen extends StatelessWidget {
                                       ...StorageRelayState.values
                                           .map((e) => MenuSortScreen(
                                               onChanged: () {
-                                                viewModel.relaySortMenuChange(state: e);
+                                                viewModel.relaySortMenuChange(
+                                                    state: e);
                                                 Navigator.pop(context);
                                               },
                                               isEqual: e ==

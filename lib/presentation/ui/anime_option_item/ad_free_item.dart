@@ -12,7 +12,14 @@ class AdFreeItem extends StatelessWidget {
         color: Colors.grey[850],
         borderRadius: const BorderRadius.all(Radius.circular(5)),
       ),
-      child: const Text('광고 무료', style: TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
+      child: const Text(
+        '광고 무료',
+        style: TextStyle(
+          color: Colors.orangeAccent,
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
+        ),
+      ),
     );
   }
 }
