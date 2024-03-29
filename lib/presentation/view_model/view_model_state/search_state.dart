@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import '../../../core/tag_state.dart';
 import '../../../domain/model/simple_anime_model.dart';
 
 part 'search_state.freezed.dart';
@@ -14,9 +13,11 @@ class SearchState with _$SearchState {
     @Default(false) bool isPagination,
     @Default(0) int searchAnimeListCount,
     @Default('') String nextUri,
-    @Default([]) List<TagState> checkTag,
-    @Default(true) bool possibleViewAnime,
-    @Default(false) bool possibleViewMembershipAnime,
+    @Default([]) List<String> checkDetailTag,
+    @Default([]) List<String> excludeDetailTag,
+    @Default([]) List<int> checkTag,
+    @Default(true) bool checkPossibleView,
+    @Default(false) bool checkMembership,
   }) = _SearchState;
 
   factory SearchState.fromJson(Map<String, Object?> json) => _$SearchStateFromJson(json);

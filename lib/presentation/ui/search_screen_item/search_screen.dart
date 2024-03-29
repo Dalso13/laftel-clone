@@ -1,9 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/detail_item/preview_anime_item.dart';
+import 'package:laftel_clone/presentation/ui/search_screen_item/search_screen_item/select_tag_list_item.dart';
 import 'package:laftel_clone/presentation/ui/search_screen_item/search_screen_item/tag_drawer_menu.dart';
 import 'package:laftel_clone/presentation/view_model/search_view_model.dart';
 import 'package:provider/provider.dart';
+
+import '../../ui_sealed/search_sealed.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -15,8 +19,22 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
       key: viewModel.scaffoldKey,
       drawerEnableOpenDragGesture: false,
-      endDrawer: const Drawer(
-        child: TagDrawerMenu(),
+      endDrawer: Drawer(
+        child: TagDrawerMenu(
+          state: state,
+          onEvent: (SearchSealed event) {
+            switch (event) {
+              case ViewPossible():
+                viewModel.selectPossibleView();
+              case Membership():
+                viewModel.selectMembership();
+              case TagSelect():
+                viewModel.selectTag(tagNum: event.tagNum);
+              case DetailTagSelect():
+                viewModel.selectDetailTag(tagName: event.tagName);
+            }
+          },
+        ),
       ),
       appBar: AppBar(
         centerTitle: true,
@@ -47,14 +65,75 @@ class SearchScreen extends StatelessWidget {
                   padding: EdgeInsets.all(8.0),
                   child: Text('선택된 필터'),
                 ),
-                TextButton(
+                Container(
+                  margin: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(width: 0.5, color: Colors.grey)),
+                  child: TextButton.icon(
+                    style: TextButton.styleFrom(
+                      minimumSize: Size.zero,
+                      padding: const EdgeInsets.only(
+                          left: 8, right: 8, top: 4, bottom: 4),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
                     onPressed: () {
                       viewModel.scaffoldKey.currentState!.openEndDrawer();
                     },
-                    child: const Text('필터'))
+                    icon: const Icon(
+                      Icons.sort,
+                      color: Colors.black,
+                      size: 15,
+                    ),
+                    label: const Text(
+                      '필터',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
+          state.checkDetailTag.isNotEmpty
+              ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Icon(
+                          Icons.check_box_outlined,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      SelectTagListItem(
+                        tagNames: state.checkDetailTag,
+                        onPressed: viewModel.removeSelectDetailTag,
+                      )
+                    ],
+                  ),
+              )
+              : const SizedBox.shrink(),
+          state.excludeDetailTag.isNotEmpty
+              ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                    children: [
+                       const Padding(
+                        padding: EdgeInsets.all(4.0),
+                        child: Icon(
+                          Icons.indeterminate_check_box_outlined,
+                          color: Colors.redAccent,
+                        ),
+                      ),
+                      SelectTagListItem(
+                        tagNames: state.excludeDetailTag,
+                        onPressed: viewModel.removeExcludeDetailTag,
+                      )
+                    ],
+                  ),
+              )
+              : const SizedBox.shrink(),
           Container(
             decoration: BoxDecoration(
               border: Border(
@@ -86,7 +165,7 @@ class SearchScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                TextButton(onPressed: () {}, child: const Text('필터'))
+                TextButton(onPressed: () {}, child: const Text('정렬'))
               ],
             ),
           ),
