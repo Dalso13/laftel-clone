@@ -1,12 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/detail_item/preview_anime_item.dart';
+import 'package:laftel_clone/presentation/ui/search_screen_item/search_screen_item/search_sort_screen.dart';
 import 'package:laftel_clone/presentation/ui/search_screen_item/search_screen_item/select_tag_list_item.dart';
 import 'package:laftel_clone/presentation/ui/search_screen_item/search_screen_item/tag_drawer_menu.dart';
 import 'package:laftel_clone/presentation/view_model/search_view_model.dart';
 import 'package:provider/provider.dart';
-
+import '../../../core/search_sort_state.dart';
 import '../../ui_sealed/search_sealed.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -96,8 +96,8 @@ class SearchScreen extends StatelessWidget {
           ),
           state.checkDetailTag.isNotEmpty
               ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(4.0),
@@ -112,14 +112,14 @@ class SearchScreen extends StatelessWidget {
                       )
                     ],
                   ),
-              )
+                )
               : const SizedBox.shrink(),
           state.excludeDetailTag.isNotEmpty
               ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
                     children: [
-                       const Padding(
+                      const Padding(
                         padding: EdgeInsets.all(4.0),
                         child: Icon(
                           Icons.indeterminate_check_box_outlined,
@@ -132,7 +132,7 @@ class SearchScreen extends StatelessWidget {
                       )
                     ],
                   ),
-              )
+                )
               : const SizedBox.shrink(),
           Container(
             decoration: BoxDecoration(
@@ -165,7 +165,33 @@ class SearchScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                TextButton(onPressed: () {}, child: const Text('정렬'))
+                TextButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (context) {
+                          return DraggableScrollableSheet(
+                            expand: false,
+                            minChildSize: 0.2,
+                            builder: (context, scrollController) =>
+                                SearchSortScreen(
+                              onChanged: ({required SearchSortState state}) {
+                                viewModel.selectSortMenu(state: state);
+                                context.pop();
+                              },
+                              currentState: state.currentState,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Text(
+                      state.currentState.kr,
+                      style: TextStyle(
+                        color: Theme.of(context).dividerColor,
+                      ),
+                    ))
               ],
             ),
           ),

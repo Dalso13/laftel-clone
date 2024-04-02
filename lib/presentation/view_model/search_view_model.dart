@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laftel_clone/core/search_sort_state.dart';
 import 'package:laftel_clone/presentation/view_model/view_model_state/search_state.dart';
 
 import '../../domain/use_case/get_anime_data_use_case/interface/get_search_anime.dart';
@@ -40,6 +41,13 @@ class SearchViewModel extends ChangeNotifier {
 
     _state = _state.copyWith(
       checkTag: tagList,
+    );
+    notifyListeners();
+  }
+
+  void selectSortMenu({required SearchSortState state}) {
+    _state = _state.copyWith(
+      currentState: state,
     );
     notifyListeners();
   }
