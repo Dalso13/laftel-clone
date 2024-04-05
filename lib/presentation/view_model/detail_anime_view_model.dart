@@ -42,6 +42,7 @@ class DetailAnimeViewModel extends ChangeNotifier {
         _detailAnimeState = _detailAnimeState.copyWith(
             detailResponseState: ResponseState.error);
     }
+
     notifyListeners();
   }
 

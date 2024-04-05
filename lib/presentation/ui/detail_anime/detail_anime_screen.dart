@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:laftel_clone/core/response_state.dart';
 import 'package:laftel_clone/presentation/ui/detail_anime/detail_anime_item/detail_anime_episode/episode_buy/episode_buy_page.dart';
@@ -37,7 +38,7 @@ class _DetailAnimeScreenState extends State<DetailAnimeScreen> {
     return Scaffold(
       body: switch (viewModel.detailAnimeState.detailResponseState) {
         ResponseState.success => viewModel.detailAnime == null
-            ? null
+            ? pop()
             : DetailAnimeItem(
                 model: viewModel.detailAnime!,
                 state: viewModel.detailAnimeState,
@@ -111,8 +112,23 @@ class _DetailAnimeScreenState extends State<DetailAnimeScreen> {
               ),
         ResponseState.loading =>
           const Center(child: CircularProgressIndicator()),
-        ResponseState.error => null,
+        ResponseState.error => pop(),
       },
+    );
+  }
+
+  Widget pop() {
+    return AlertDialog(
+      title: const Text("error"),
+      content: const Text("연결 실패"),
+      actions: <Widget>[
+        ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pop(); //창 닫기
+          },
+          child: const Text("닫기"),
+        ),
+      ],
     );
   }
 }

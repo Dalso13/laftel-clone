@@ -1,10 +1,8 @@
-import 'package:laftel_clone/domain/model/search_anime_model.dart';
-
+import 'package:laftel_clone/domain/use_case/get_anime_data_use_case/interface/get_search_anime.dart';
+import '../../../model/search_anime_model.dart';
 import '../../../repository/anime_repository.dart';
-import '../interface/get_search_anime.dart';
 
-class GetSearchAnimeImpl implements GetSearchAnime{
-
+class GetSearchAnimeImpl implements GetSearchAnime {
   final AnimeRepository _repository;
 
   const GetSearchAnimeImpl({
@@ -12,12 +10,12 @@ class GetSearchAnimeImpl implements GetSearchAnime{
   }) : _repository = repository;
 
   @override
-  Future<SearchAnimeModel> getSearchAnime() {
-    return _repository.getSearchAnimeList();
+  Future<SearchAnimeModel> getSearchAnime({required String query}) {
+    return _repository.getSearchAnimeList(query: query);
   }
 
   @override
   Future<SearchAnimeModel> getNextAnime({required String next}) {
-    return _repository.getNextAnimeList(next: next);
+    return _repository.getSearchNextAnimeList(next: next);
   }
 }

@@ -1,18 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:laftel_clone/core/search_sort_state.dart';
+import 'package:laftel_clone/core/finder_sort_state.dart';
 
 import '../../storage_box_item/storage_box_child_item/menu_sort_screen.dart';
 
-class SearchSortScreen extends StatelessWidget {
-  final void Function({required SearchSortState state}) _onChanged;
-  final SearchSortState _currentState;
+class FinderSortScreen extends StatelessWidget {
+  final void Function({required FinderSortState state}) _onChanged;
+  final FinderSortState _currentState;
 
-  const SearchSortScreen({
+  const FinderSortScreen({
     super.key,
-    required void Function({required SearchSortState state}) onChanged,
-    required SearchSortState currentState,
+    required void Function({required FinderSortState state}) onChanged,
+    required FinderSortState currentState,
   })  : _onChanged = onChanged,
         _currentState = currentState;
 
@@ -20,7 +18,7 @@ class SearchSortScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ...SearchSortState.values
+        ...FinderSortState.values
             .map(
               (e) => MenuSortScreen(
                 onChanged: () {

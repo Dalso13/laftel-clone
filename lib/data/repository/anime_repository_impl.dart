@@ -5,8 +5,9 @@ import 'package:laftel_clone/data/mapper/detail_anime_mapper.dart';
 import 'package:laftel_clone/data/mapper/quarter_anime_mapper.dart';
 import 'package:laftel_clone/data/mapper/theme_anime_mapper.dart';
 import 'package:laftel_clone/data/source/detail_anime_source.dart';
-import 'package:laftel_clone/data/source/specific_anime_source.dart';
 import 'package:laftel_clone/data/source/search_anime_source.dart';
+import 'package:laftel_clone/data/source/specific_anime_source.dart';
+import 'package:laftel_clone/data/source/finder_anime_source.dart';
 import 'package:laftel_clone/domain/model/detail_anime_model.dart';
 import 'package:laftel_clone/domain/model/search_anime_model.dart';
 import 'package:laftel_clone/domain/model/simple_anime_model.dart';
@@ -15,16 +16,19 @@ import 'package:laftel_clone/domain/repository/anime_repository.dart';
 
 class AnimeRepositoryImpl implements AnimeRepository {
   final SpecificAnimeSource _quarterSource;
+  final FinderAnimeSource _finderAnimeSource;
   final SearchAnimeSource _searchAnimeSource;
   final DetailAnimeSource _detailAnimeSource;
 
   const AnimeRepositoryImpl({
     required SpecificAnimeSource quarterSource,
-    required SearchAnimeSource themeAnimeSource,
+    required FinderAnimeSource themeAnimeSource,
     required DetailAnimeSource detailAnimeSource,
+    required SearchAnimeSource searchAnimeSource,
   })  : _quarterSource = quarterSource,
-        _searchAnimeSource = themeAnimeSource,
-        _detailAnimeSource = detailAnimeSource;
+        _finderAnimeSource = themeAnimeSource,
+        _detailAnimeSource = detailAnimeSource,
+        _searchAnimeSource = searchAnimeSource;
 
   @override
   Future<List<SimpleAnimeModel>> getQuarterAnime(
@@ -47,23 +51,41 @@ class AnimeRepositoryImpl implements AnimeRepository {
     try {
       final data = await _detailAnimeSource.getSource(id);
 
+      if (data.isEmpty) {
+        return const Result.error();
+      }
+
       final json = DetailAnimeDto.fromJson(data);
 
       return Result.success(json.toModel());
     } catch (e) {
-      return Result.error(Exception(e.toString()));
+      return const Result.error();
     }
   }
 
   @override
-  Future<SearchAnimeModel> getSearchAnimeList() async {
-    final data = await _searchAnimeSource.getSearchAnimeList();
+  Future<SearchAnimeModel> getFinderAnimeList() async {
+    final data = await _finderAnimeSource.getFinderAnimeList();
 
     return _toSimpleAnimeModel(map: data);
   }
   
   @override
-  Future<SearchAnimeModel> getNextAnimeList({required String next}) async {
+  Future<SearchAnimeModel> getFinderNextAnimeList({required String next}) async {
+    final data = await _finderAnimeSource.getNextAnimeList(next: next);
+
+    return _toSimpleAnimeModel(map: data);
+  }
+
+  @override
+  Future<SearchAnimeModel> getSearchAnimeList({required String query}) async{
+    final data = await _searchAnimeSource.getSearchAnimeList(query: query);
+
+    return _toSimpleAnimeModel(map: data);
+  }
+
+  @override
+  Future<SearchAnimeModel> getSearchNextAnimeList({required String next}) async{
     final data = await _searchAnimeSource.getNextAnimeList(next: next);
 
     return _toSimpleAnimeModel(map: data);
@@ -75,7 +97,10 @@ class AnimeRepositoryImpl implements AnimeRepository {
     return SearchAnimeModel(
       count: map['count'] ?? 0,
       model: data.map((e) => SimpleAnimeDto.fromJson(e).toModel()).toList(),
-      next: map['next'],
+      next: map['next'] ?? '',
     );
   }
+
+
+
 }

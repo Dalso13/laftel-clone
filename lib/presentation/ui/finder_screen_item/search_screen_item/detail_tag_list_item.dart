@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:laftel_clone/core/tag_state.dart';
-import '../../../view_model/view_model_state/search_state.dart';
+import '../../../view_model/view_model_state/finder_state.dart';
 
 class DetailTagListItem extends StatelessWidget {
-  final SearchState _state;
+  final FinderState _state;
   final TagCategoryState _tag;
   final void Function({required int tagNum}) _tagSelect;
   final void Function({required String tagName}) _detailTagSelect;
 
   const DetailTagListItem({
     super.key,
-    required SearchState state,
+    required FinderState state,
     required TagCategoryState tag,
     required void Function({required int tagNum}) tagSelect,
     required void Function({required String tagName}) detailTagSelect,

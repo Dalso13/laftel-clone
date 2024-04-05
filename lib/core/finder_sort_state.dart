@@ -1,4 +1,4 @@
-enum SearchSortState {
+enum FinderSortState {
   rank(idx : 0, kr : '라프텔 랭킹 순'),
   name(idx : 1, kr : '이름 순'),
   newAnime(idx : 2, kr : '최신 순'),
@@ -8,7 +8,7 @@ enum SearchSortState {
   final int idx;
   final String kr;
 
-  const SearchSortState({
+  const FinderSortState({
     required this.idx,
     required this.kr
   });

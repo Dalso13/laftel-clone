@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/week_state.dart';
 import '../../../view_model/main_view_model.dart';
-import '../detail_item/preview_anime_item.dart';
+import '../../other_items/simple_anime_grid_view.dart';
 import '../detail_item/week_change_item.dart';
 
 class WeekAnimeListScreen extends StatelessWidget {
@@ -30,21 +30,10 @@ class WeekAnimeListScreen extends StatelessWidget {
             changeWeek: _changeWeek,
             currentWeek: state.currentWeek,
           ),
-          Expanded(
-            child: GridView.count(
-              crossAxisSpacing: 15,
-              padding:
-                  const EdgeInsets.only(left: 8, right: 8, bottom: 16, top: 16),
-              crossAxisCount: 2,
-              children: viewModel
-                  .getNowDayAnimeList(state.currentWeek)
-                  .map((e) => PreviewAnimeItem(
-                        model: e,
-                        onTab: _onTab,
-                      ))
-                  .toList(),
-            ),
-          ),
+          SimpleAnimeGridView(
+            goDetailScreen: _onTab,
+            modelList: state.weekAnimeList,
+          )
         ],
       ),
     );

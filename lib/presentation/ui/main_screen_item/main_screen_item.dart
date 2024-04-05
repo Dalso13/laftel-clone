@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/popular_anime_item.dart';
@@ -25,22 +26,27 @@ class MainScreenItem extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverStack(
-          children: const [
-            SliverToBoxAdapter(
+          children: [
+            const SliverToBoxAdapter(
               child: BannerItem(),
             ),
             SliverAppBar(
               floating: false,
               pinned: true,
-              leading: Icon(Icons.watch_later_outlined),
+              leading: const Icon(Icons.watch_later_outlined),
               actions: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Icon(Icons.notifications_none_outlined),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(Icons.search),
+                  padding: const EdgeInsets.all(8.0),
+                  child:  IconButton(
+                    onPressed: () {
+                      context.push('/search');
+                    },
+                    icon: const Icon(Icons.search),
+                  ),
                 ),
               ],
             ),

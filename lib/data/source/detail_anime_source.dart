@@ -7,8 +7,9 @@ class DetailAnimeSource {
     final response = await http.get(Uri.parse(
         'https://laftel.net/api/v1.0/items/$id/detail/'));
 
-    Map<String, dynamic> json = jsonDecode(utf8.decode(response.bodyBytes));
-
-    return json;
+    if(response.statusCode == 200) {
+      return jsonDecode(utf8.decode(response.bodyBytes));
+    }
+    return {};
   }
 }

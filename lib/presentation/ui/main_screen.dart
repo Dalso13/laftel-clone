@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/main_screen_item.dart';
-import 'package:laftel_clone/presentation/ui/search_screen_item/search_screen.dart';
 import 'package:laftel_clone/presentation/ui/storage_box_item/storage_box_screen.dart';
 import 'package:laftel_clone/presentation/view_model/main_view_model.dart';
 import 'package:provider/provider.dart';
-
 import 'bottom_navi_item.dart';
+import 'finder_screen_item/finder_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -33,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           const MainScreenItem(),
-          const SearchScreen(),
+          const FinderScreen(),
           const StorageBoxScreen(),
           Container()
         ],

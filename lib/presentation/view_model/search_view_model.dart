@@ -1,122 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:laftel_clone/core/search_sort_state.dart';
+import 'package:laftel_clone/domain/use_case/get_anime_data_use_case/interface/get_search_anime.dart';
 import 'package:laftel_clone/presentation/view_model/view_model_state/search_state.dart';
-
-import '../../domain/use_case/get_anime_data_use_case/interface/get_search_anime.dart';
 
 class SearchViewModel extends ChangeNotifier {
   SearchState _state = const SearchState();
+  final ScrollController _scrollController = ScrollController();
   final GetSearchAnime _getSearchAnime;
-  final scrollController = ScrollController();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   SearchViewModel({
     required GetSearchAnime getSearchAnime,
   }) : _getSearchAnime = getSearchAnime {
-    searchAnimeList();
     _pagination();
   }
 
+  ScrollController get scrollController => _scrollController;
   SearchState get state => _state;
 
-  void init() {
-    searchAnimeList();
-  }
-
-  void searchAnimeList() async {
-    final list = await _getSearchAnime.getSearchAnime();
+  void searchAnimeList({required String query}) async {
+    final list = await _getSearchAnime.getSearchAnime(query: query);
 
     _state = _state.copyWith(
-      searchAnimeList: list.model,
+      animeList: list.model,
       nextUri: list.next,
-      searchAnimeListCount: list.count,
     );
     notifyListeners();
   }
 
-  void selectTag({required int tagNum}) {
-    final tagList = state.checkTag.toList();
 
-    tagList.contains(tagNum) ? tagList.remove(tagNum) : tagList.add(tagNum);
-
-    _state = _state.copyWith(
-      checkTag: tagList,
-    );
-    notifyListeners();
-  }
-
-  void selectSortMenu({required SearchSortState state}) {
-    _state = _state.copyWith(
-      currentState: state,
-    );
-    notifyListeners();
-  }
-
-  // 반복되는 코드를 줄여야한다.
-  void selectDetailTag({required String tagName}) {
-    final tagList = state.checkDetailTag.toList();
-
-    if (state.checkDetailTag.contains(tagName) ||
-        state.excludeDetailTag.contains(tagName)) {
-      tagList.remove(tagName);
-      excludeDetailTag(tagName: tagName);
-    } else {
-      tagList.add(tagName);
-    }
-
-    _state = _state.copyWith(
-      checkDetailTag: tagList,
-    );
-
-    notifyListeners();
-  }
-
-  // 반복되는 코드를 줄여야한다.
-  void removeSelectDetailTag({required String tagName}) {
-    final tagList = state.checkDetailTag.toList();
-    tagList.remove(tagName);
-
-    _state = _state.copyWith(
-      checkDetailTag: tagList,
-    );
-    notifyListeners();
-  }
-
-  // 반복되는 코드를 줄여야한다.
-  void removeExcludeDetailTag({required String tagName}) {
-    final tagList = state.excludeDetailTag.toList();
-    tagList.remove(tagName);
-
-    _state = _state.copyWith(
-      excludeDetailTag: tagList,
-    );
-    notifyListeners();
-  }
-
-  // 반복되는 코드를 줄여야한다.
-  void excludeDetailTag({required String tagName}) {
-    final tagList = state.excludeDetailTag.toList();
-    state.excludeDetailTag.contains(tagName)
-        ? tagList.remove(tagName)
-        : tagList.add(tagName);
-
-    _state = _state.copyWith(
-      excludeDetailTag: tagList,
-    );
-  }
-
-  void selectPossibleView() {
-    _state = _state.copyWith(
-      checkPossibleView: !_state.checkPossibleView,
-    );
-    notifyListeners();
-  }
-
-  void selectMembership() {
-    _state = _state.copyWith(
-      checkMembership: !_state.checkMembership,
-    );
-    notifyListeners();
+  void _pagination() {
+    _scrollController.addListener(() {
+      //print('1');
+      if (_state.isPagination || _state.nextUri.isEmpty) return;
+      if (_scrollController.position.maxScrollExtent ==
+          _scrollController.offset) {
+        _nextAnimeList();
+        //print('1');
+      }
+    });
   }
 
   void _nextAnimeList() async {
@@ -126,32 +46,19 @@ class SearchViewModel extends ChangeNotifier {
     notifyListeners();
     final list = await _getSearchAnime.getNextAnime(next: _state.nextUri);
 
-    final model = state.searchAnimeList.toList()..addAll(list.model);
+    final model = state.animeList.toList()..addAll(list.model);
 
     _state = _state.copyWith(
-      searchAnimeList: model,
+      animeList: model,
       nextUri: list.next,
-      searchAnimeListCount: list.count,
       isPagination: false,
     );
     notifyListeners();
   }
 
-  void _pagination() {
-    scrollController.addListener(() {
-      //print('1');
-      if (state.isPagination) return;
-      if (scrollController.position.maxScrollExtent ==
-          scrollController.offset) {
-        _nextAnimeList();
-        //print('1');
-      }
-    });
-  }
-
   @override
   void dispose() {
-    scrollController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 }

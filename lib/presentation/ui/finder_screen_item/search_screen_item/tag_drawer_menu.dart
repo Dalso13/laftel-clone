@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:laftel_clone/core/tag_state.dart';
-import 'package:laftel_clone/presentation/ui/search_screen_item/search_screen_item/detail_tag_list_item.dart';
-import 'package:laftel_clone/presentation/view_model/view_model_state/search_state.dart';
-import '../../../ui_sealed/search_sealed.dart';
+import 'package:laftel_clone/presentation/view_model/view_model_state/finder_state.dart';
+import '../../../ui_sealed/finder_sealed.dart';
+import 'detail_tag_list_item.dart';
 
 class TagDrawerMenu extends StatelessWidget {
-  final SearchState _state;
-  final void Function(SearchSealed event) _onEvent;
+  final FinderState _state;
+  final void Function(FinderSealed event) _onEvent;
 
   const TagDrawerMenu({
     super.key,
-    required SearchState state,
-    required void Function(SearchSealed event) onEvent,
+    required FinderState state,
+    required void Function(FinderSealed event) onEvent,
   })  : _state = state,
         _onEvent = onEvent;
 
@@ -20,7 +20,7 @@ class TagDrawerMenu extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.zero,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 100,
         ),
         ListTile(
@@ -35,7 +35,7 @@ class TagDrawerMenu extends StatelessWidget {
           ),
           trailing: InkWell(
             onTap: () {
-              _onEvent(const SearchSealed.viewPossible());
+              _onEvent(const FinderSealed.viewPossible());
             },
             child: Icon(
               _state.checkPossibleView
@@ -59,7 +59,7 @@ class TagDrawerMenu extends StatelessWidget {
           ),
           trailing: InkWell(
             onTap: () {
-              _onEvent(const SearchSealed.membership());
+              _onEvent(const FinderSealed.membership());
             },
             child: Icon(
               _state.checkMembership
@@ -75,10 +75,10 @@ class TagDrawerMenu extends StatelessWidget {
               tag: e,
               state: _state,
               detailTagSelect: ({required String tagName}) {
-                _onEvent(SearchSealed.detailTagSelect(tagName: tagName));
+                _onEvent(FinderSealed.detailTagSelect(tagName: tagName));
               },
               tagSelect: ({required int tagNum}) {
-                _onEvent(SearchSealed.tagSelect(tagNum: tagNum));
+                _onEvent(FinderSealed.tagSelect(tagNum: tagNum));
               },
             ))
       ],
