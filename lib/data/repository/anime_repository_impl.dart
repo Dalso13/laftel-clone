@@ -50,14 +50,18 @@ class AnimeRepositoryImpl implements AnimeRepository {
       {required int id}) async {
     try {
       final data = await _detailAnimeSource.getAnimeInfo(id);
-      final series = await _detailAnimeSource.getSeries(id);
+      final series = data['series_id'] == null ? {} : await _detailAnimeSource.getSeries(data['series_id']);
+
 
       if (data.isEmpty) {
+
         return const Result.error();
       }
+
+
       final json = DetailAnimeDto.fromJson(data);
 
-      final List<dynamic> seriesItem = series.isEmpty ? [] : series['result'];
+      final List<dynamic> seriesItem = series.isEmpty ? [] : series['results'] ?? [];
 
       return Result.success(json.toModel(seriesItem: seriesItem));
 
