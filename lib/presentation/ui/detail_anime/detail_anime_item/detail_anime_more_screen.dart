@@ -51,7 +51,7 @@ class DetailAnimeMoreScreen extends StatelessWidget {
                         ),
                         onPressed: () {
                         },
-                        child: Text('#${e.name}', style: const TextStyle(fontSize: 12)),
+                        child: Text('#${e}', style: const TextStyle(fontSize: 12)),
                       ),
                     );
                   }).toList(),

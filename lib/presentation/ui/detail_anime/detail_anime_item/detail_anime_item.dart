@@ -119,7 +119,7 @@ class DetailAnimeItem extends StatelessWidget {
               goWriteScreen: _goWriteScreen,
             ),
             DetailAnimeRelatedScreen(
-              relatedList: _model.relatedItem,
+              relatedList: _state.seriesLists,
               onTab: _onTab,
             )
           ],

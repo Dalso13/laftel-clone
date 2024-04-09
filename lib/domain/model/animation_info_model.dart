@@ -15,7 +15,6 @@ class AnimationInfoModel with _$AnimationInfoModel {
     required bool isLaftelOnly,
     required bool isLaftelOriginal,
     required bool isUncensored,
-    required String season,
   }) = _AnimationInfoModel;
 
   factory AnimationInfoModel.fromJson(Map<String, Object?> json) => _$AnimationInfoModelFromJson(json);

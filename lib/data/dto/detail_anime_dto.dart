@@ -1,3 +1,4 @@
+/*
 class DetailAnimeDto {
   int? id;
   String? created;
@@ -212,4 +213,193 @@ class DetailAnimeDto {
   }
 
 //</editor-fold>
+}*/
+
+class DetailAnimeDto {
+  int? id;
+  String? name;
+  dynamic notice;
+  String? img;
+  List<Images>? images;
+  dynamic highlightVideo;
+  String? content;
+  List<String>? awards;
+  String? medium;
+  String? contentRating;
+  bool? isEnding;
+  String? production;
+  String? airYearQuarter;
+  bool? isDubbed;
+  bool? isLaftelOnly;
+  bool? isLaftelOriginal;
+  bool? isUncensored;
+  String? distributedAirTime;
+  bool? isAdult;
+  String? avodStatus;
+  bool? isAvod;
+  bool? isSvod;
+  bool? isViewing;
+  List<String>? genres;
+  int? cntShortReview;
+  double? avgRating;
+  List<String>? tags;
+  String? expireDatetime;
+  bool? isEpisodeExisted;
+  int? seriesId;
+  List<String>? author;
+  List<String>? illustrator;
+  String? copyright;
+  Map<String,dynamic>? rating;
+  bool? isWish;
+  bool? isHate;
+
+  DetailAnimeDto(
+      {this.id,
+        this.name,
+        this.notice,
+        this.img,
+        this.images,
+        this.highlightVideo,
+        this.content,
+        this.awards,
+        this.medium,
+        this.contentRating,
+        this.isEnding,
+        this.production,
+        this.airYearQuarter,
+        this.isDubbed,
+        this.isLaftelOnly,
+        this.isLaftelOriginal,
+        this.isUncensored,
+        this.distributedAirTime,
+        this.isAdult,
+        this.avodStatus,
+        this.isAvod,
+        this.isSvod,
+        this.isViewing,
+        this.genres,
+        this.cntShortReview,
+        this.avgRating,
+        this.tags,
+        this.expireDatetime,
+        this.isEpisodeExisted,
+        this.seriesId,
+        this.author,
+        this.illustrator,
+        this.copyright,
+        this.rating,
+        this.isWish,
+        this.isHate});
+
+  DetailAnimeDto.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    notice = json['notice'];
+    img = json['img'];
+    if (json['images'] != null) {
+      images = <Images>[];
+      json['images'].forEach((v) {
+        images!.add(new Images.fromJson(v));
+      });
+    }
+    highlightVideo = json['highlight_video'];
+    content = json['content'];
+    awards = json['awards'].cast<String>();
+    medium = json['medium'];
+    contentRating = json['content_rating'];
+    isEnding = json['is_ending'];
+    production = json['production'];
+    airYearQuarter = json['air_year_quarter'];
+    isDubbed = json['is_dubbed'];
+    isLaftelOnly = json['is_laftel_only'];
+    isLaftelOriginal = json['is_laftel_original'];
+    isUncensored = json['is_uncensored'];
+    distributedAirTime = json['distributed_air_time'];
+    isAdult = json['is_adult'];
+    avodStatus = json['avod_status'];
+    isAvod = json['is_avod'];
+    isSvod = json['is_svod'];
+    isViewing = json['is_viewing'];
+    genres = json['genres'].cast<String>();
+    cntShortReview = json['cnt_short_review'];
+    avgRating = json['avg_rating'];
+    tags = json['tags'].cast<String>();
+    expireDatetime = json['expire_datetime'];
+    isEpisodeExisted = json['is_episode_existed'];
+    seriesId = json['series_id'];
+    author = json['author'].cast<String>();
+    illustrator = json['illustrator'].cast<String>();
+    copyright = json['copyright'];
+    rating =
+    json['rating'];
+    isWish = json['is_wish'];
+    isHate = json['is_hate'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['notice'] = this.notice;
+    data['img'] = this.img;
+    if (this.images != null) {
+      data['images'] = this.images!.map((v) => v.toJson()).toList();
+    }
+    data['highlight_video'] = this.highlightVideo;
+    data['content'] = this.content;
+    data['awards'] = this.awards;
+    data['medium'] = this.medium;
+    data['content_rating'] = this.contentRating;
+    data['is_ending'] = this.isEnding;
+    data['production'] = this.production;
+    data['air_year_quarter'] = this.airYearQuarter;
+    data['is_dubbed'] = this.isDubbed;
+    data['is_laftel_only'] = this.isLaftelOnly;
+    data['is_laftel_original'] = this.isLaftelOriginal;
+    data['is_uncensored'] = this.isUncensored;
+    data['distributed_air_time'] = this.distributedAirTime;
+    data['is_adult'] = this.isAdult;
+    data['avod_status'] = this.avodStatus;
+    data['is_avod'] = this.isAvod;
+    data['is_svod'] = this.isSvod;
+    data['is_viewing'] = this.isViewing;
+    data['genres'] = this.genres;
+    data['cnt_short_review'] = this.cntShortReview;
+    data['avg_rating'] = this.avgRating;
+    data['tags'] = this.tags;
+    data['expire_datetime'] = this.expireDatetime;
+    data['is_episode_existed'] = this.isEpisodeExisted;
+    data['series_id'] = this.seriesId;
+    data['author'] = this.author;
+    data['illustrator'] = this.illustrator;
+    data['copyright'] = this.copyright;
+    if (this.rating != null) {
+      data['rating'] = this.rating;
+    }
+    data['is_wish'] = this.isWish;
+    data['is_hate'] = this.isHate;
+    return data;
+  }
+}
+
+class Images {
+  String? optionName;
+  String? imgUrl;
+  String? cropRatio;
+
+  Images({this.optionName, this.imgUrl, this.cropRatio});
+
+  Images.fromJson(Map<String, dynamic> json) {
+    optionName = json['option_name'];
+    imgUrl = json['img_url'];
+    cropRatio = json['crop_ratio'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['option_name'] = this.optionName;
+    data['img_url'] = this.imgUrl;
+    data['crop_ratio'] = this.cropRatio;
+    return data;
+  }
 }

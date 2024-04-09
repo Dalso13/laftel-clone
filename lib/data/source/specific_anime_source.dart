@@ -8,7 +8,10 @@ import '../dto/theme_anime_dto.dart';
 class SpecificAnimeSource {
   Future<List<SimpleAnimeDto>> getQuarterAnimeList(String year, String quarter) async {
     var response = await http.get(Uri.parse(
-        'https://laftel.net/api/search/v1/discover/?years=$year년%20$quarter분기'));
+        'https://laftel.net/api/search/v1/discover/?years=$year년%20$quarter분기'),headers: {
+      "laftel": "TeJava",
+      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1_4; like Mac OS X) AppleWebKit/600.11 (KHTML, like Gecko)  Chrome/54.0.1486.383 Mobile Safari/600.8",
+    });
 
     Map<String, dynamic> json = jsonDecode(utf8.decode(response.bodyBytes));
     final List<dynamic> data = json['results'];
@@ -27,7 +30,10 @@ class SpecificAnimeSource {
   }
   Future<List<ThemeAnimeDto>> getThemeAnimeList() async {
     var response = await http.get(Uri.parse(
-        'https://laftel.net/api/recommends/v1/themes/?limit=3'));
+        'https://laftel.net/api/recommends/v1/themes/?limit=3'),headers: {
+      "laftel": "TeJava",
+      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1_4; like Mac OS X) AppleWebKit/600.11 (KHTML, like Gecko)  Chrome/54.0.1486.383 Mobile Safari/600.8",
+    });
     Map<String, dynamic> json = jsonDecode(utf8.decode(response.bodyBytes));
     final List<dynamic> data = json['results'];
 

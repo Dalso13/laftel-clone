@@ -86,8 +86,6 @@ class DetailAnimeBanner extends StatelessWidget {
                     children: [
                       Text(
                         _model.mainTag
-                            .where((element) => element.type == '장르')
-                            .map((e) => e.name)
                             .toList()
                             .take(2)
                             .join('·'),

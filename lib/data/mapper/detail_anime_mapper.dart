@@ -1,9 +1,13 @@
 import 'package:laftel_clone/data/dto/detail_anime_dto.dart';
 import 'package:laftel_clone/domain/model/animation_info_model.dart';
 import 'package:laftel_clone/domain/model/detail_anime_model.dart';
+import 'package:laftel_clone/domain/model/series_anime_model.dart';
 import 'package:laftel_clone/domain/model/simple_anime_model.dart';
 import 'package:laftel_clone/domain/model/tag_model.dart';
 
+
+// old dto
+/*
 extension DetailAnimeMapper on DetailAnimeDto {
   DetailAnimeModel toModel() {
     return DetailAnimeModel(
@@ -74,8 +78,7 @@ extension DetailAnimeMapper on DetailAnimeDto {
         medium: '',
         isLaftelOnly: false,
         isLaftelOriginal: false,
-        isUncensored: false,
-        season: '',);
+        isUncensored: false);
     } else {
       return AnimationInfoModel(
         production: map['production'] == null
@@ -91,4 +94,35 @@ extension DetailAnimeMapper on DetailAnimeDto {
       );
     }
   }
+}
+*/
+
+
+extension DetailAnimeMapper on DetailAnimeDto {
+  DetailAnimeModel toModel({required List<dynamic> seriesItem}) {
+    return DetailAnimeModel(id: id ?? 0,
+        name: name ?? '',
+        img: img ?? '',
+        content: content ?? '',
+        author: author ?? [],
+        contentRating: contentRating ?? '',
+        isAdult: isAdult ?? false,
+        viewable: isViewing ?? false,
+        isEnding: isEnding ?? false,
+        avgRating: avgRating ?? 0,
+        animationInfo:
+        AnimationInfoModel(
+            production: production ?? '',
+            airYearQuarter: airYearQuarter ?? '',
+            medium: medium ?? '',
+            isDubbed: isDubbed ?? false,
+            isLaftelOnly: isLaftelOnly ?? false,
+            isLaftelOriginal: isLaftelOriginal ?? false,
+            isUncensored: isUncensored ?? false),
+        mainTag: tags ?? [],
+        seriesId: seriesId ?? -1,
+        seriesItem: seriesItem.map((e) => SeriesAnimeModel(id: e['id'] ?? -1, name: e['name'] ?? '')).toList()
+    );
+  }
+
 }

@@ -49,19 +49,23 @@ class AnimeRepositoryImpl implements AnimeRepository {
   Future<Result<DetailAnimeModel>> getDetailAnimeModel(
       {required int id}) async {
     try {
-      final data = await _detailAnimeSource.getSource(id);
+      final data = await _detailAnimeSource.getAnimeInfo(id);
+      final series = await _detailAnimeSource.getSeries(id);
 
       if (data.isEmpty) {
         return const Result.error();
       }
-
       final json = DetailAnimeDto.fromJson(data);
 
-      return Result.success(json.toModel());
+      final List<dynamic> seriesItem = series.isEmpty ? [] : series['result'];
+
+      return Result.success(json.toModel(seriesItem: seriesItem));
+
     } catch (e) {
       return const Result.error();
     }
   }
+
 
   @override
   Future<SearchAnimeModel> getFinderAnimeList() async {

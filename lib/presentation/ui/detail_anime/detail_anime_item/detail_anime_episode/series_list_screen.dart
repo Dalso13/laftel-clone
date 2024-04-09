@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:laftel_clone/domain/model/series_anime_model.dart';
 import 'package:laftel_clone/domain/model/simple_anime_model.dart';
 
 class SeriesListScreen extends StatelessWidget {
-  final List<SimpleAnimeModel> _series;
+  final List<SeriesAnimeModel> _series;
   final void Function({required int id}) _onTab;
 
 
   const SeriesListScreen({
     super.key,
-    required List<SimpleAnimeModel> series,
+    required List<SeriesAnimeModel> series,
     required void Function({required int id}) onTab,
   })  : _series = series,
         _onTab = onTab;
