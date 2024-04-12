@@ -20,6 +20,7 @@ class DetailAnimeViewModel extends ChangeNotifier {
   }) : _getDetailAnime = getDetailAnime;
 
   DetailAnimeModel? get detailAnime => _detailAnime;
+
   DetailAnimeState get detailAnimeState => _detailAnimeState;
 
   void setDetailAnime({required int id}) async {
@@ -35,9 +36,11 @@ class DetailAnimeViewModel extends ChangeNotifier {
 
     switch (detailAnime) {
       case Success<DetailAnimeModel>():
-        _detailAnimeState = _detailAnimeState.copyWith(
-            detailResponseState: ResponseState.success);
         _detailAnime = detailAnime.data;
+        final episodeList = await _getDetailAnime.getEpisodeAnimeModel(id: id);
+        _detailAnimeState = _detailAnimeState.copyWith(
+            detailResponseState: ResponseState.success,
+            episodeList: episodeList);
       case Error():
         _detailAnimeState = _detailAnimeState.copyWith(
             detailResponseState: ResponseState.error);
@@ -56,7 +59,7 @@ class DetailAnimeViewModel extends ChangeNotifier {
   }
 
   void clickScrollPageChange({required DetailAnimeMenuState menuState}) {
-    if(menuState == _detailAnimeState.menuState) return;
+    if (menuState == _detailAnimeState.menuState) return;
     pageController.animateToPage(
       menuState.idx,
       duration: const Duration(milliseconds: 200),
@@ -67,42 +70,37 @@ class DetailAnimeViewModel extends ChangeNotifier {
   }
 
   void changeSpoilerEnabled() {
-    _detailAnimeState = _detailAnimeState.copyWith(
-      spoiler: !_detailAnimeState.spoiler
-    );
+    _detailAnimeState =
+        _detailAnimeState.copyWith(spoiler: !_detailAnimeState.spoiler);
     notifyListeners();
   }
 
   void onUpdateRating({required double rating}) {
-    _detailAnimeState = _detailAnimeState.copyWith(
-        rating: rating
-    );
+    _detailAnimeState = _detailAnimeState.copyWith(rating: rating);
     notifyListeners();
   }
-  void reSetCommendWriteState(){
+
+  void reSetCommendWriteState() {
     _detailAnimeState = _detailAnimeState.copyWith(
-        rating: 0,
-        spoiler: false,
+      rating: 0,
+      spoiler: false,
     );
     textController.text = '';
     notifyListeners();
   }
 
-  void episodeAllSelect({bool listEmpty = false }) {
+  void episodeAllSelect({bool listEmpty = false}) {
     List<int> allSelect = [];
-    if(detailAnimeState.selectEpisode.length != 10 && !listEmpty) {
-      allSelect.addAll([1,2,3,4,5,6,7,8,9,10]);
+    if (detailAnimeState.selectEpisode.length != 10 && !listEmpty) {
+      allSelect.addAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     }
-    _detailAnimeState = _detailAnimeState.copyWith(
-      selectEpisode: allSelect
-    );
+    _detailAnimeState = _detailAnimeState.copyWith(selectEpisode: allSelect);
     notifyListeners();
   }
 
   void episodeSorting() {
     _detailAnimeState = _detailAnimeState.copyWith(
-        episodeSorting: !_detailAnimeState.episodeSorting
-    );
+        episodeSorting: !_detailAnimeState.episodeSorting);
     notifyListeners();
   }
 
@@ -110,9 +108,7 @@ class DetailAnimeViewModel extends ChangeNotifier {
     final allSelect = _detailAnimeState.selectEpisode.toList();
 
     allSelect.contains(id) ? allSelect.remove(id) : allSelect.add(id);
-    _detailAnimeState = _detailAnimeState.copyWith(
-        selectEpisode: allSelect
-    );
+    _detailAnimeState = _detailAnimeState.copyWith(selectEpisode: allSelect);
     notifyListeners();
   }
 

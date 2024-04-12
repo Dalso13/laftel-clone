@@ -1,7 +1,9 @@
 import 'package:laftel_clone/core/result.dart';
 import 'package:laftel_clone/data/dto/detail_anime_dto.dart';
+import 'package:laftel_clone/data/dto/episode_dto.dart';
 import 'package:laftel_clone/data/dto/simple_anime_dto.dart';
 import 'package:laftel_clone/data/mapper/detail_anime_mapper.dart';
+import 'package:laftel_clone/data/mapper/episode_anime_mapper.dart';
 import 'package:laftel_clone/data/mapper/quarter_anime_mapper.dart';
 import 'package:laftel_clone/data/mapper/theme_anime_mapper.dart';
 import 'package:laftel_clone/data/source/detail_anime_source.dart';
@@ -13,6 +15,8 @@ import 'package:laftel_clone/domain/model/search_anime_model.dart';
 import 'package:laftel_clone/domain/model/simple_anime_model.dart';
 import 'package:laftel_clone/domain/model/theme_anime_model.dart';
 import 'package:laftel_clone/domain/repository/anime_repository.dart';
+
+import '../../domain/model/episode_anime_model.dart';
 
 class AnimeRepositoryImpl implements AnimeRepository {
   final SpecificAnimeSource _quarterSource;
@@ -54,7 +58,6 @@ class AnimeRepositoryImpl implements AnimeRepository {
 
 
       if (data.isEmpty) {
-
         return const Result.error();
       }
 
@@ -99,6 +102,15 @@ class AnimeRepositoryImpl implements AnimeRepository {
     return _toSimpleAnimeModel(map: data);
   }
 
+  @override
+  Future<List<EpisodeAnimeModel>> getEpisodeAnimeModel({required int id}) async {
+    final data = await _detailAnimeSource.getEpisode(id);
+    if(data.isEmpty)return [];
+    final dto = EpisodeDto.fromJson(data);
+    final result = dto.results;
+    if(result == null)return [];
+    return result.map((e) => e.toModel()).toList();
+  }
   SearchAnimeModel _toSimpleAnimeModel({required Map<String,dynamic> map}) {
     final List<dynamic> data = map['results'];
 

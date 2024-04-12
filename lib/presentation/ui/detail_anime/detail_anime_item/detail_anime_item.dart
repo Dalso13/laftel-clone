@@ -112,6 +112,7 @@ class DetailAnimeItem extends StatelessWidget {
           children: [
             DetailAnimeEpisodeScreen(
               model: _model,
+              state: _state,
               onTab: _onTab,
             ),
             UserCommentScreen(
@@ -119,7 +120,7 @@ class DetailAnimeItem extends StatelessWidget {
               goWriteScreen: _goWriteScreen,
             ),
             DetailAnimeRelatedScreen(
-              relatedList: _state.seriesLists,
+              relatedList: _state.seriesList,
               onTab: _onTab,
             )
           ],

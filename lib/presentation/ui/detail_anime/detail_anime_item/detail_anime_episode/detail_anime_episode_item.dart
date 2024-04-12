@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:laftel_clone/domain/model/episode_anime_model.dart';
 
 class DetailAnimeEpisodeItem extends StatelessWidget {
-  final String _img;
+  final EpisodeAnimeModel _model;
 
   const DetailAnimeEpisodeItem({
     super.key,
-    required String img,
-  }) : _img = img;
+    required EpisodeAnimeModel model,
+  }) : _model = model;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: Image.network(
-        _img,
+        _model.thumbnailPath,
         width: 100,
         fit: BoxFit.cover,
       ),
-      title: const Text('test'),
+      title: Text('${_model.episodeOrder}화 ${_model.subject}'),
       subtitle: const Text('test'),
       trailing: const Icon(Icons.download),
     );

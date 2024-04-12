@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:laftel_clone/core/detail_anime_menu_state.dart';
+import 'package:laftel_clone/domain/model/episode_anime_model.dart';
 import 'package:laftel_clone/domain/model/simple_anime_model.dart';
 
 import '../../../core/response_state.dart';
@@ -17,7 +18,8 @@ class DetailAnimeState with _$DetailAnimeState {
     @Default(false) bool spoiler,
     @Default(DetailAnimeMenuState.episode) DetailAnimeMenuState menuState,
     @Default([]) List<int> selectEpisode,
-    @Default([]) List<SimpleAnimeModel> seriesLists,
+    @Default([]) List<SimpleAnimeModel> seriesList,
+    @Default([]) List<EpisodeAnimeModel> episodeList,
     @Default(false) bool episodeSorting,
   }) = _DetailAnimeState;
 

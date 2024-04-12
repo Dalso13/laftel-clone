@@ -2,7 +2,7 @@ class EpisodeDto {
   int? count;
   String? next;
   String? previous;
-  List<Results>? results;
+  List<EpisodeResults>? results;
 
   EpisodeDto({this.count, this.next, this.previous, this.results});
 
@@ -11,9 +11,9 @@ class EpisodeDto {
     next = json['next'];
     previous = json['previous'];
     if (json['results'] != null) {
-      results = <Results>[];
+      results = <EpisodeResults>[];
       json['results'].forEach((v) {
-        results!.add(Results.fromJson(v));
+        results!.add(EpisodeResults.fromJson(v));
       });
     }
   }
@@ -24,13 +24,14 @@ class EpisodeDto {
     data['next'] = next;
     data['previous'] = previous;
     if (results != null) {
-      data['results'] = results!.map((v) => v.toJson()).toList();
+      data['results'] =
+          results!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Results {
+class EpisodeResults {
   int? id;
   String? title;
   String? subject;
@@ -54,7 +55,7 @@ class Results {
   dynamic accessType;
   bool? isAvailable;
 
-  Results(
+  EpisodeResults(
       {this.id,
         this.title,
         this.subject,
@@ -78,7 +79,7 @@ class Results {
         this.accessType,
         this.isAvailable});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  EpisodeResults.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     subject = json['subject'];
@@ -87,12 +88,7 @@ class Results {
     episodeOrder = json['episode_order'];
     thumbnailPath = json['thumbnail_path'];
     hasPreview = json['has_preview'];
-    if (json['access_info_list'] != null) {
-      accessInfoList = <Null>[];
-      json['access_info_list'].forEach((v) {
-        accessInfoList!.add(v);
-      });
-    }
+    accessInfoList = json['access_type'];
     runningTime = json['running_time'];
     progressbar = json['progressbar'];
     itemExpireDatetime = json['item_expire_datetime'];
@@ -101,13 +97,13 @@ class Results {
     isFree = json['is_free'];
     isViewing = json['is_viewing'];
     if (json['products'] != null) {
-      products = <Null>[];
+      products = [];
       json['products'].forEach((v) {
         products!.add(v);
       });
     }
     if (json['episode_products'] != null) {
-      episodeProducts = <Null>[];
+      episodeProducts = [];
       json['episode_products'].forEach((v) {
         episodeProducts!.add(v);
       });
@@ -191,8 +187,7 @@ class Rating {
     data['broadcast_channel_name'] = broadcastChannelName;
     data['broadcast_date'] = broadcastDate;
     if (ratingComponents != null) {
-      data['rating_components'] =
-          ratingComponents!.map((v) => v.toJson()).toList();
+      data['rating_components'] = ratingComponents;
     }
     return data;
   }
