@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laftel_clone/presentation/ui/main_screen_item/popular_anime_item.dart';

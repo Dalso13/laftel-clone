@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:laftel_clone/domain/model/series_anime_model.dart';
-import 'package:laftel_clone/domain/model/simple_anime_model.dart';
 import 'animation_info_model.dart';
 
 part 'detail_anime_model.freezed.dart';

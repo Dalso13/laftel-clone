@@ -13,18 +13,18 @@ class EpisodeDto {
     if (json['results'] != null) {
       results = <Results>[];
       json['results'].forEach((v) {
-        results!.add(new Results.fromJson(v));
+        results!.add(Results.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['count'] = this.count;
-    data['next'] = this.next;
-    data['previous'] = this.previous;
-    if (this.results != null) {
-      data['results'] = this.results!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['count'] = count;
+    data['next'] = next;
+    data['previous'] = previous;
+    if (results != null) {
+      data['results'] = results!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -114,45 +114,45 @@ class Results {
     }
     publishedDatetime = json['published_datetime'];
     rating =
-    json['rating'] != null ? new Rating.fromJson(json['rating']) : null;
+    json['rating'] != null ? Rating.fromJson(json['rating']) : null;
     accessType = json['access_type'];
     isAvailable = json['is_available'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['subject'] = this.subject;
-    data['description'] = this.description;
-    data['episode_num'] = this.episodeNum;
-    data['episode_order'] = this.episodeOrder;
-    data['thumbnail_path'] = this.thumbnailPath;
-    data['has_preview'] = this.hasPreview;
-    if (this.accessInfoList != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['subject'] = subject;
+    data['description'] = description;
+    data['episode_num'] = episodeNum;
+    data['episode_order'] = episodeOrder;
+    data['thumbnail_path'] = thumbnailPath;
+    data['has_preview'] = hasPreview;
+    if (accessInfoList != null) {
       data['access_info_list'] =
-          this.accessInfoList!.map((v) => v.toJson()).toList();
+          accessInfoList!.map((v) => v.toJson()).toList();
     }
-    data['running_time'] = this.runningTime;
-    data['progressbar'] = this.progressbar;
-    data['item_expire_datetime'] = this.itemExpireDatetime;
-    data['in_app_download'] = this.inAppDownload;
-    data['is_avod'] = this.isAvod;
-    data['is_free'] = this.isFree;
-    data['is_viewing'] = this.isViewing;
-    if (this.products != null) {
-      data['products'] = this.products!.map((v) => v.toJson()).toList();
+    data['running_time'] = runningTime;
+    data['progressbar'] = progressbar;
+    data['item_expire_datetime'] = itemExpireDatetime;
+    data['in_app_download'] = inAppDownload;
+    data['is_avod'] = isAvod;
+    data['is_free'] = isFree;
+    data['is_viewing'] = isViewing;
+    if (products != null) {
+      data['products'] = products!.map((v) => v.toJson()).toList();
     }
-    if (this.episodeProducts != null) {
+    if (episodeProducts != null) {
       data['episode_products'] =
-          this.episodeProducts!.map((v) => v.toJson()).toList();
+          episodeProducts!.map((v) => v.toJson()).toList();
     }
-    data['published_datetime'] = this.publishedDatetime;
-    if (this.rating != null) {
-      data['rating'] = this.rating!.toJson();
+    data['published_datetime'] = publishedDatetime;
+    if (rating != null) {
+      data['rating'] = rating!.toJson();
     }
-    data['access_type'] = this.accessType;
-    data['is_available'] = this.isAvailable;
+    data['access_type'] = accessType;
+    data['is_available'] = isAvailable;
     return data;
   }
 }
@@ -185,14 +185,14 @@ class Rating {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['rating'] = this.rating;
-    data['classification_number'] = this.classificationNumber;
-    data['broadcast_channel_name'] = this.broadcastChannelName;
-    data['broadcast_date'] = this.broadcastDate;
-    if (this.ratingComponents != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['rating'] = rating;
+    data['classification_number'] = classificationNumber;
+    data['broadcast_channel_name'] = broadcastChannelName;
+    data['broadcast_date'] = broadcastDate;
+    if (ratingComponents != null) {
       data['rating_components'] =
-          this.ratingComponents!.map((v) => v.toJson()).toList();
+          ratingComponents!.map((v) => v.toJson()).toList();
     }
     return data;
   }

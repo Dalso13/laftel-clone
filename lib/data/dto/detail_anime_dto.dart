@@ -299,7 +299,7 @@ class DetailAnimeDto {
     if (json['images'] != null) {
       images = <Images>[];
       json['images'].forEach((v) {
-        images!.add(new Images.fromJson(v));
+        images!.add(Images.fromJson(v));
       });
     }
     highlightVideo = json['highlight_video'];
@@ -337,47 +337,47 @@ class DetailAnimeDto {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['notice'] = this.notice;
-    data['img'] = this.img;
-    if (this.images != null) {
-      data['images'] = this.images!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['notice'] = notice;
+    data['img'] = img;
+    if (images != null) {
+      data['images'] = images!.map((v) => v.toJson()).toList();
     }
-    data['highlight_video'] = this.highlightVideo;
-    data['content'] = this.content;
-    data['awards'] = this.awards;
-    data['medium'] = this.medium;
-    data['content_rating'] = this.contentRating;
-    data['is_ending'] = this.isEnding;
-    data['production'] = this.production;
-    data['air_year_quarter'] = this.airYearQuarter;
-    data['is_dubbed'] = this.isDubbed;
-    data['is_laftel_only'] = this.isLaftelOnly;
-    data['is_laftel_original'] = this.isLaftelOriginal;
-    data['is_uncensored'] = this.isUncensored;
-    data['distributed_air_time'] = this.distributedAirTime;
-    data['is_adult'] = this.isAdult;
-    data['avod_status'] = this.avodStatus;
-    data['is_avod'] = this.isAvod;
-    data['is_svod'] = this.isSvod;
-    data['is_viewing'] = this.isViewing;
-    data['genres'] = this.genres;
-    data['cnt_short_review'] = this.cntShortReview;
-    data['avg_rating'] = this.avgRating;
-    data['tags'] = this.tags;
-    data['expire_datetime'] = this.expireDatetime;
-    data['is_episode_existed'] = this.isEpisodeExisted;
-    data['series_id'] = this.seriesId;
-    data['author'] = this.author;
-    data['illustrator'] = this.illustrator;
-    data['copyright'] = this.copyright;
-    if (this.rating != null) {
-      data['rating'] = this.rating;
+    data['highlight_video'] = highlightVideo;
+    data['content'] = content;
+    data['awards'] = awards;
+    data['medium'] = medium;
+    data['content_rating'] = contentRating;
+    data['is_ending'] = isEnding;
+    data['production'] = production;
+    data['air_year_quarter'] = airYearQuarter;
+    data['is_dubbed'] = isDubbed;
+    data['is_laftel_only'] = isLaftelOnly;
+    data['is_laftel_original'] = isLaftelOriginal;
+    data['is_uncensored'] = isUncensored;
+    data['distributed_air_time'] = distributedAirTime;
+    data['is_adult'] = isAdult;
+    data['avod_status'] = avodStatus;
+    data['is_avod'] = isAvod;
+    data['is_svod'] = isSvod;
+    data['is_viewing'] = isViewing;
+    data['genres'] = genres;
+    data['cnt_short_review'] = cntShortReview;
+    data['avg_rating'] = avgRating;
+    data['tags'] = tags;
+    data['expire_datetime'] = expireDatetime;
+    data['is_episode_existed'] = isEpisodeExisted;
+    data['series_id'] = seriesId;
+    data['author'] = author;
+    data['illustrator'] = illustrator;
+    data['copyright'] = copyright;
+    if (rating != null) {
+      data['rating'] = rating;
     }
-    data['is_wish'] = this.isWish;
-    data['is_hate'] = this.isHate;
+    data['is_wish'] = isWish;
+    data['is_hate'] = isHate;
     return data;
   }
 }
@@ -396,10 +396,10 @@ class Images {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['option_name'] = this.optionName;
-    data['img_url'] = this.imgUrl;
-    data['crop_ratio'] = this.cropRatio;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['option_name'] = optionName;
+    data['img_url'] = imgUrl;
+    data['crop_ratio'] = cropRatio;
     return data;
   }
 }

@@ -2,8 +2,6 @@ import 'package:laftel_clone/data/dto/detail_anime_dto.dart';
 import 'package:laftel_clone/domain/model/animation_info_model.dart';
 import 'package:laftel_clone/domain/model/detail_anime_model.dart';
 import 'package:laftel_clone/domain/model/series_anime_model.dart';
-import 'package:laftel_clone/domain/model/simple_anime_model.dart';
-import 'package:laftel_clone/domain/model/tag_model.dart';
 
 
 // old dto

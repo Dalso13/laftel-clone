@@ -44,7 +44,7 @@ class SelectTagListItem extends StatelessWidget {
                         ),
                         label: Text(
                           e,
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                         ),
                       ),
                     ),
