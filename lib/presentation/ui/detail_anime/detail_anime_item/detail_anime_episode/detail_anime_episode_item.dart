@@ -14,14 +14,20 @@ class DetailAnimeEpisodeItem extends StatelessWidget {
     return ListTile(
       leading: Image.network(
         _model.thumbnailPath,
-        width: 100,
-        fit: BoxFit.cover,
+        fit: BoxFit.fitHeight,
       ),
-      title: Text('${_model.episodeOrder}화 ${_model.subject}'),
-      subtitle: const Text('test'),
+      title: Text(
+        '${_model.episodeOrder}화 ${_model.subject}',
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+      subtitle: Text('${_model.runningTime.inMinutes}분 · ${_getDateTime(_model.itemExpireDatetime)}'),
       trailing: const Icon(Icons.download),
     );
   }
 
-
+  String _getDateTime(DateTime time) {
+    return '${time.year}.${time.month}.${time.day}';
+  }
 }

@@ -8,6 +8,7 @@ class DetailAnimeSource {
   }
 
   Future<Map<String, dynamic>> getEpisode(int id) async {
+
     Map<String, dynamic> data = await _getResponse(
         'https://laftel.net/api/episodes/v2/list/?item_id=$id&sort=oldest&show_playback_offset=true&offset=0');
 

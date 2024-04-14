@@ -14,6 +14,8 @@ class EpisodeAnimeModel with _$EpisodeAnimeModel {
     required String thumbnailPath,
     required String subject,
     required String description,
+    required Duration runningTime,
+    required DateTime itemExpireDatetime,
     required bool hasPreview,
     required bool inAppDownload,
     required bool isAvod,

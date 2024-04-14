@@ -100,7 +100,7 @@ extension DetailAnimeMapper on DetailAnimeDto {
   DetailAnimeModel toModel({required List<dynamic> seriesItem}) {
     return DetailAnimeModel(id: id ?? 0,
         name: name ?? '',
-        img: img ?? '',
+        img: images == null ? img ?? '' : images!.isEmpty ? img ?? '' : images!.first.imgUrl ?? '' ,
         content: content ?? '',
         author: author ?? [],
         contentRating: contentRating ?? '',
