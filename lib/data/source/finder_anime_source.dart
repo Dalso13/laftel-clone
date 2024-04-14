@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class FinderAnimeSource {
   Future<Map<String,dynamic>> getFinderAnimeList() async {
-    StringBuffer uri = StringBuffer('https://laftel.net/api/search/v1/discover/');
+    StringBuffer uri = StringBuffer('https://laftel.net/api/search/v1/discover/?');
 
     return await _getAnimeList(uri: uri.toString());
   }

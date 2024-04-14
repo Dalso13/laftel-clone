@@ -13,6 +13,8 @@ class SearchState with _$SearchState {
       @Default(false) bool isLoading,
       @Default(false) bool isPagination,
       @Default('') String nextUri,
+      @Default(false) bool isFocus,
+      @Default(false) bool isPop,
   }) = _SearchState;
 
   factory SearchState.fromJson(Map<String, Object?> json) => _$SearchStateFromJson(json);

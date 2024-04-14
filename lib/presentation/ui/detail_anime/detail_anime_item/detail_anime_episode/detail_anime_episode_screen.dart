@@ -21,17 +21,17 @@ class DetailAnimeEpisodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children:
-          [
-            DetailAnimeSeriesSelect(
-              model: _model,
-              onTab: _onTab,
-            ),
-            ..._state.episodeList.map((e) => DetailAnimeEpisodeItem(model: e)).toList()
-          ],
-      ),
+    return ListView(
+      padding: EdgeInsets.zero,
+
+      children:
+        [
+          DetailAnimeSeriesSelect(
+            model: _model,
+            onTab: _onTab,
+          ),
+          ..._state.episodeList.map((e) => DetailAnimeEpisodeItem(model: e)).toList()
+        ],
     );
   }
 }

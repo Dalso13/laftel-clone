@@ -11,20 +11,37 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = context.watch<SearchViewModel>();
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: !viewModel.state.isFocus
+            ? IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back_ios),
+              )
+            : null,
+        title: TextField(
+          controller: viewModel.textController,
+          focusNode: viewModel.focusNode,
+          decoration: InputDecoration(
+            hintText: "제목, 제작사, 감독으로 검색 (초성)",
+            prefixIcon:
+                viewModel.state.isFocus ? const Icon(Icons.search) : null,
+            suffixIcon: viewModel.textController.text == ''
+                ? null
+                : IconButton(
+                    onPressed: viewModel.clearTextField,
+                    icon: Icon(Icons.remove_circle_outline),
+                  ),
+          ),
+          onSubmitted: (String text) {
+            viewModel.searchAnimeList(query: text);
+          },
+        ),
+      ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-              ),
-              onSubmitted: (String text) {
-                viewModel.searchAnimeList(query: text);
-              },
-            ),
-          ),
           SimpleAnimeGridView(
             modelList: viewModel.state.animeList,
             goDetailScreen: ({required int id}) {

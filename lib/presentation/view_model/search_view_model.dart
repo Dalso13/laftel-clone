@@ -4,16 +4,20 @@ import 'package:laftel_clone/presentation/view_model/view_model_state/search_sta
 
 class SearchViewModel extends ChangeNotifier {
   SearchState _state = const SearchState();
-  final ScrollController _scrollController = ScrollController();
+  final _scrollController = ScrollController();
+  final _textController = TextEditingController();
+  final _focusNode = FocusNode();
   final GetSearchAnime _getSearchAnime;
 
   SearchViewModel({
     required GetSearchAnime getSearchAnime,
   }) : _getSearchAnime = getSearchAnime {
-    _pagination();
+    _initState();
   }
 
-  ScrollController get scrollController => _scrollController;
+  get scrollController => _scrollController;
+  get textController => _textController;
+  get focusNode => _focusNode;
   SearchState get state => _state;
 
   void searchAnimeList({required String query}) async {
@@ -27,7 +31,7 @@ class SearchViewModel extends ChangeNotifier {
   }
 
 
-  void _pagination() {
+  void _initState() {
     _scrollController.addListener(() {
       //print('1');
       if (_state.isPagination || _state.nextUri.isEmpty) return;
@@ -35,6 +39,20 @@ class SearchViewModel extends ChangeNotifier {
           _scrollController.offset) {
         _nextAnimeList();
         //print('1');
+      }
+    });
+    _focusNode.addListener(() {
+      if(_focusNode.hasFocus && !_state.isFocus) {
+        _state = _state.copyWith(
+          isFocus: true
+        );
+        notifyListeners();
+      }
+      if(!_focusNode.hasFocus && _state.isFocus) {
+        _state = _state.copyWith(
+            isFocus: false
+        );
+        notifyListeners();
       }
     });
   }
@@ -56,9 +74,16 @@ class SearchViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void clearTextField() {
+    _textController.text = '';
+    notifyListeners();
+  }
+
   @override
   void dispose() {
     _scrollController.dispose();
+    _textController.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 }

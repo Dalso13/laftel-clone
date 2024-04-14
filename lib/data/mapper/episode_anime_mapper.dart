@@ -13,7 +13,7 @@ extension EpisodeAnimeMapper on EpisodeResults {
       description: description ?? '',
       hasPreview: hasPreview ?? false,
       inAppDownload: inAppDownload ?? false,
-      itemExpireDatetime: itemExpireDatetime != null ? DateTime.parse('itemExpireDatetime') : DateTime.now(),
+      itemExpireDatetime: itemExpireDatetime != null ? DateTime.parse(itemExpireDatetime!) : DateTime.now(),
       runningTime: runningTime != null ? _getRunningTime(runningTime!) : const Duration(microseconds: 0),
       isAvod: isAvod ?? false,
       isFree: isFree ?? false,

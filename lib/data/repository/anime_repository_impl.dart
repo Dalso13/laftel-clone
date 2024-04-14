@@ -104,6 +104,7 @@ class AnimeRepositoryImpl implements AnimeRepository {
 
   @override
   Future<List<EpisodeAnimeModel>> getEpisodeAnimeModel({required int id}) async {
+
     final data = await _detailAnimeSource.getEpisode(id);
     if(data.isEmpty)return [];
     final dto = EpisodeDto.fromJson(data);
