@@ -91,8 +91,8 @@ class DetailAnimeViewModel extends ChangeNotifier {
 
   void episodeAllSelect({bool listEmpty = false}) {
     List<int> allSelect = [];
-    if (detailAnimeState.selectEpisode.length != 10 && !listEmpty) {
-      allSelect.addAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    if (_detailAnimeState.selectEpisode.length != _detailAnimeState.episodeList.length && !listEmpty) {
+      allSelect.addAll(_detailAnimeState.episodeList.map((e) => e.id));
     }
     _detailAnimeState = _detailAnimeState.copyWith(selectEpisode: allSelect);
     notifyListeners();

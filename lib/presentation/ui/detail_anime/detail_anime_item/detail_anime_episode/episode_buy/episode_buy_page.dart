@@ -27,7 +27,7 @@ class EpisodeBuyPage extends StatelessWidget {
                     onPressed: viewModel.episodeAllSelect,
                     icon: Icon(
                       Icons.check_circle,
-                      color: state.selectEpisode.length != 10
+                      color: state.selectEpisode.length != state.episodeList.length
                           ? Theme.of(context).dividerColor
                           : Theme.of(context).primaryColor,
                     ),
@@ -56,20 +56,20 @@ class EpisodeBuyPage extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
-              children: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+              children: state.episodeList
                   .map(
                     (e) => ListTile(
                       onTap: () {
-                        viewModel.episodeSelect(id: e);
+                        viewModel.episodeSelect(id: e.id);
                       },
-                      tileColor: !state.selectEpisode.contains(e)
+                      tileColor: !state.selectEpisode.contains(e.id)
                           ? Colors.transparent
                           : Theme.of(context).primaryColor.withOpacity(0.05),
                       leading: Stack(
                         alignment: Alignment.center,
                         children: [
                           Image.network(
-                            viewModel.detailAnime!.img,
+                            e.thumbnailPath,
                             width: 80,
                             fit: BoxFit.cover,
                           ),
@@ -86,7 +86,7 @@ class EpisodeBuyPage extends StatelessWidget {
                               : const SizedBox.shrink(),
                         ],
                       ),
-                      title: const Text('test'),
+                      title: Text(e.subject),
                       subtitle: const Text('대여 700P · 소장 1,500P'),
                     ),
                   )
