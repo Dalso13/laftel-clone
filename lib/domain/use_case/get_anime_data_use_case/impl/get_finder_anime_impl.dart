@@ -12,8 +12,22 @@ class GetFinderAnimeImpl implements GetFinderAnime{
   }) : _repository = repository;
 
   @override
-  Future<SearchAnimeModel> getFinderAnime() {
-    return _repository.getFinderAnimeList();
+  Future<SearchAnimeModel> getFinderAnime({
+    required List<String> years,
+    required List<String> genres,
+    required List<String> tags,
+    required List<String> broadcasts,
+    required List<String> releases,
+    required List<String> brands,
+  }) {
+    return _repository.getFinderAnimeList(
+        years: years,
+        brands: brands,
+        broadcasts: broadcasts,
+        genres: genres,
+        releases: releases,
+        tags: tags
+    );
   }
 
   @override

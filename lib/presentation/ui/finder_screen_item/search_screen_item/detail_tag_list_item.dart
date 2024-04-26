@@ -6,14 +6,14 @@ class DetailTagListItem extends StatelessWidget {
   final FinderState _state;
   final TagCategoryState _tag;
   final void Function({required int tagNum}) _tagSelect;
-  final void Function({required String tagName}) _detailTagSelect;
+  final void Function({required TagState tag}) _detailTagSelect;
 
   const DetailTagListItem({
     super.key,
     required FinderState state,
     required TagCategoryState tag,
     required void Function({required int tagNum}) tagSelect,
-    required void Function({required String tagName}) detailTagSelect,
+    required void Function({required TagState tag}) detailTagSelect,
   })  : _state = state,
         _tag = tag,
         _tagSelect = tagSelect,
@@ -63,6 +63,8 @@ class DetailTagListItem extends StatelessWidget {
   }
 
   Widget detailTag({required TagState tag}) {
+    List<String> currentCategory;
+
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -79,7 +81,7 @@ class DetailTagListItem extends StatelessWidget {
             tag.kr,
             style: TextStyle(
               fontSize: 13,
-              color: _state.checkDetailTag.contains(tag.kr)
+              color: _state.checkDetailTag.contains(tag)
                   ? Colors.deepPurpleAccent
                   : _state.excludeDetailTag.contains(tag.kr)
                       ? Colors.redAccent
@@ -89,9 +91,9 @@ class DetailTagListItem extends StatelessWidget {
         ),
         trailing: InkWell(
             onTap: () {
-              _detailTagSelect(tagName: tag.kr);
+              _detailTagSelect(tag: tag);
             },
-            child: _state.checkDetailTag.contains(tag.kr)
+            child: _state.checkDetailTag.contains(tag)
                 ? const Icon(
                     Icons.check_box_outlined,
                     color: Colors.deepPurpleAccent,

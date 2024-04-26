@@ -11,7 +11,14 @@ abstract interface class AnimeRepository {
   Future<List<ThemeAnimeModel>> getThemeAnimeModel();
   Future<Result<DetailAnimeModel>> getDetailAnimeModel({required int id});
   Future<List<EpisodeAnimeModel>> getEpisodeAnimeModel({required int id});
-  Future<SearchAnimeModel> getFinderAnimeList();
+  Future<SearchAnimeModel> getFinderAnimeList({
+    required List<String> years,
+    required List<String> genres,
+    required List<String> tags,
+    required List<String> broadcasts,
+    required List<String> releases,
+    required List<String> brands,
+  });
   Future<SearchAnimeModel> getSearchAnimeList({required String query});
   Future<SearchAnimeModel> getSearchNextAnimeList({required String next});
   Future<SearchAnimeModel> getFinderNextAnimeList({required String next});

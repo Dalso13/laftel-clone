@@ -75,8 +75,22 @@ class AnimeRepositoryImpl implements AnimeRepository {
 
 
   @override
-  Future<SearchAnimeModel> getFinderAnimeList() async {
-    final data = await _finderAnimeSource.getFinderAnimeList();
+  Future<SearchAnimeModel> getFinderAnimeList({
+    required List<String> years,
+    required List<String> genres,
+    required List<String> tags,
+    required List<String> broadcasts,
+    required List<String> releases,
+    required List<String> brands,
+  }) async {
+    final data = await _finderAnimeSource.getFinderAnimeList(
+        years: years,
+        brands: brands,
+        broadcasts: broadcasts,
+        genres: genres,
+        releases: releases,
+        tags: tags
+    );
 
     return _toSimpleAnimeModel(map: data);
   }

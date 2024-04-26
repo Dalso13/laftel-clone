@@ -31,7 +31,7 @@ class FinderScreen extends StatelessWidget {
               case TagSelect():
                 viewModel.selectTag(tagNum: event.tagNum);
               case DetailTagSelect():
-                viewModel.selectDetailTag(tagName: event.tagName);
+                viewModel.selectDetailTag(tagState: event.tagState);
             }
           },
         ),
@@ -112,7 +112,7 @@ class FinderScreen extends StatelessWidget {
                         ),
                       ),
                       SelectTagListItem(
-                        tagNames: state.checkDetailTag,
+                        tagNames: state.checkDetailTag.map((e) => e.kr).toList(),
                         onPressed: viewModel.removeSelectDetailTag,
                       )
                     ],

@@ -74,8 +74,8 @@ class TagDrawerMenu extends StatelessWidget {
         ...TagCategoryState.values.map((e) => DetailTagListItem(
               tag: e,
               state: _state,
-              detailTagSelect: ({required String tagName}) {
-                _onEvent(FinderSealed.detailTagSelect(tagName: tagName));
+              detailTagSelect: ({required TagState tag}) {
+                _onEvent(FinderSealed.detailTagSelect(tagState: tag));
               },
               tagSelect: ({required int tagNum}) {
                 _onEvent(FinderSealed.tagSelect(tagNum: tagNum));
