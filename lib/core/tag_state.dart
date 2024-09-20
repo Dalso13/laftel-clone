@@ -1,4 +1,6 @@
 // 원래라면 DB로 처리하겠지만 그냥 약식으로 처리
+import 'package:laftel_clone/core/get_quarter.dart';
+
 
 enum TagCategoryState {
   genre(kr: '장르', tagNum: 0),
@@ -18,7 +20,7 @@ enum TagCategoryState {
   });
 }
 
-
+// TODO: 안에있는 값을 리스트로 해서 깔끔하게 할려햇는데 애초에 enum을 쓰는게 잘못된거 같아서 수정예정
 enum TagState {
   // 장르 태그 너무많아서 조금하고 나중에 추가예정
   bl(kr: 'BL', tagNum: 0),
@@ -51,6 +53,8 @@ enum TagState {
   battle(kr: '배틀', tagNum: 1),
 
   // 연도 역시 마찬가지로
+  twentyFourQ4(kr: '2024년 4분기', tagNum: 2),
+  twentyFourQ3(kr: '2024년 3분기', tagNum: 2),
   twentyFourQ2(kr: '2024년 2분기', tagNum: 2),
   twentyFourQ1(kr: '2024년 1분기', tagNum: 2),
   twentyThreeQ4(kr: '2023년 4분기', tagNum: 2),

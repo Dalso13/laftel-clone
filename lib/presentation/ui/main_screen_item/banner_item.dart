@@ -9,8 +9,8 @@ class BannerItem extends StatefulWidget {
 }
 
 class _BannerItemState extends State<BannerItem> {
-  CarouselController buttonCarouselController = CarouselController();
-  final List<int> _data = [1,2,3];
+  CarouselSliderController  buttonCarouselController = CarouselSliderController ();
+  final List<int> _data = [1,2];
   int _currentIndex = 0;
 
   @override
@@ -20,11 +20,7 @@ class _BannerItemState extends State<BannerItem> {
         children: [
           CarouselSlider(
             items: _data.map((e) {
-              return Container(
-                color: Colors.grey,
-                width: double.maxFinite,
-                child: Text('$e'),
-              );
+              return Image.asset('assets/img/logo${e}.png');
             }).toList(),
             carouselController: buttonCarouselController,
             options: CarouselOptions(
@@ -36,7 +32,7 @@ class _BannerItemState extends State<BannerItem> {
                     _currentIndex = index;
                   });
                 },
-              height: 600
+              height: 500
             ),
           ),
           Positioned(
